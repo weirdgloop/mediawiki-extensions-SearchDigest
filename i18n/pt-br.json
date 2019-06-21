@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Diogo Freitas Castro"
+		]
+	},
+	"searchdigest-desc": "Utilizado para rastreamento e exibição de pesquisas falhadas",
+	"searchdigest-help": "Esta página mostra as pesquisas falhadas mais comuns nesta wiki, durante a última semana."
+}

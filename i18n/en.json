@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jayden Bailey"
+		]
+	},
+	"searchdigest": "SearchDigest",
+	"searchdigest-desc": "Used for tracking and displaying missed search queries",
+	"searchdigest-help": "This page displays the most common failed searches on this wiki for the last week.",
+	"searchdigest-error-invalid-misses": "Invalid value for misses: $1 ($2)",
+	"searchdigest-error-invalid-query": "Invalid value for query: $1 ($2)"
+}
