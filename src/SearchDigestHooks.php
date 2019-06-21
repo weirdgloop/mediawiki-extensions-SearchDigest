@@ -24,7 +24,7 @@ class SearchDigestHooks {
 			return true;
 		}
 
-		$query = $title->getText();
+		$query = $title->getFullText();
 		$query = trim(mb_convert_encoding($query, 'UTF-8'));
 
 		$record = SearchDigestRecord::getFromQuery( $query );
