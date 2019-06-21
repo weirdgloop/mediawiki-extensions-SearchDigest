@@ -20,7 +20,6 @@
 		"SearchDigestHooks": "src/SearchDigestHooks.php",
 		"SearchDigestException": "src/SearchDigestException.php",
 		"SearchDigestRecord": "src/SearchDigestRecord.php",
-		"SearchDigestPager": "src/SearchDigestPager.php",
 		"SpecialSearchDigest": "src/SpecialSearchDigest.php"
 	},
 	"SpecialPages": {
