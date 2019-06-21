@@ -6,7 +6,7 @@
 	"url": "https://github.com/jaydenkieran/SearchDigest",
 	"version": "1.0",
 	"descriptionmsg": "searchdigest-desc",
-	"license-name": "MIT",
+	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
 
