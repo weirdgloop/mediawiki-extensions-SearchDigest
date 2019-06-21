@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `searchdigest` (
-  `sd_query` VARCHAR(255) BINARY NOT NULL,
+  `sd_query` VARBINARY(255) NOT NULL,
   `sd_misses` INT(9) UNSIGNED NOT NULL,
   `sd_touched` DATETIME,
 
