@@ -16,6 +16,11 @@ MediaWiki extension which tracks failed searches on your wiki and displays them 
 wfLoadExtension( 'SearchDigest' );
 ```
 
+## Configuration
+| Variable | Type | Description | Default |
+| --- | --- | --- | --- |
+| `$wgSearchDigestSafe` | bool | Whether to wrap some extension functionality in try/catch statements to avoid breaking Special:Search if something goes wrong | `true`
+
 ## Translation
 This extension can be translated through the messages in the `ì18n` folder if you're a developer. As a wiki administrator, you may find it a better option to edit the messages on-site in the MediaWiki namespace.
 

@@ -9,7 +9,7 @@
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
-
+		"SearchDigestSafe": true
 	},
 	"type": "other",
 	"requires": {

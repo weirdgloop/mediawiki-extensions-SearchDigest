@@ -15,11 +15,7 @@ class SearchDigestHooks {
 		$updater->addExtensionTable( 'searchdigest', __DIR__ . '/../sql/searchdigest.sql' );
 	}
 
-	/**
-	 * Called when the Special:Search 'go' feature is triggered and the target page doesn't exist
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchNogomatch
-	 */
-	public static function onSpecialSearchNogomatch ( &$title ) {
+	public static function reallyDoSpecialSearchNogomatch ( &$title ) {
 		if ( !is_object( $title ) ) {
 			return true;
 		}
@@ -40,6 +36,27 @@ class SearchDigestHooks {
 
 		$record->setTouched( date("Y-m-d H:i:s") );
 		$record->save();
+		return $record;
+	}
+
+	/**
+	 * Called when the Special:Search 'go' feature is triggered and the target page doesn't exist
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchNogomatch
+	 */
+	public static function onSpecialSearchNogomatch ( &$title ) {
+		global $wgSearchDigestSafe;
+
+		if ($wgSearchDigestSafe === true) {
+			// Allow running this with try/catch wrapped
+			// to avoid breaking search completely if something goes wrong
+			try {
+				SearchDigestHooks::reallyDoSpecialSearchNogomatch( $title );
+			} catch (Exception $e) {
+				wfDebugLog( 'searchdigest', "Problem with logging failed go search for {$title->getFullText()}. Exception: {$e->getMessage()}" );
+			}
+		} else {
+			SearchDigestHooks::reallyDoSpecialSearchNogomatch( $title );
+		}
 
 		return true;
 	}
