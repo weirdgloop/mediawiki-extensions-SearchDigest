@@ -10,7 +10,13 @@ class SearchDigestPager extends ReverseChronologicalPager {
   }
 
   function formatRow( $row ) {
-    $link = $this->linkRenderer->makeLink( Title::newFromText( $row->sd_query ) );
+		global $wgSearchDigestStrikeValidPages;
+
+		$title = Title::newFromText( $row->sd_query );
+		$link = $this->linkRenderer->makeLink( $title );
+		if ( ( $title->isKnown() === true ) && ( $wgSearchDigestStrikeValidPages === true ) ) {
+			$link = '<s>' . $link . '</s>';
+		}
 
     return Xml::tags( 'li', null, $link . ' (' . $row->sd_misses . ')' );
   }
