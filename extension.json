@@ -28,9 +28,9 @@
 	"ResourceModules": {
     "ext.searchdigest": {
         "scripts": [
-            "src/modules/ext.searchdigest.redirect.js"
+            "ext.searchdigest.redirect.js"
 				],
-				"styles": "src/modules/ext.searchdigest.redirect.css",
+				"styles": "ext.searchdigest.redirect.css",
         "messages": [
 						"searchdigest-redirect-buttontext",
 						"searchdigest-redirect-successtext",
@@ -52,8 +52,8 @@
     }
 	},
 	"ResourceFileModulePaths": {
-    "localBasePath": "",
-    "remoteExtPath": "SearchDigest"
+    "localBasePath": "src/modules",
+    "remoteExtPath": "SearchDigest/src/modules"
 	},
 	"MessagesDirs": {
 		"SearchDigest": "i18n"
