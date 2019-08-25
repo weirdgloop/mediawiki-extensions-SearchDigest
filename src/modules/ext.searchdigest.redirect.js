@@ -39,7 +39,7 @@ SDRedirectDialog.prototype.initialize = function () {
     $overlay: true,
     placeholder: mw.message('searchdigest-redirect-inputplaceholder').escaped()
   } );
-  this.content.$element.append( '<p>' + mw.message('searchdigest-redirect-helptext').escaped() + '</p>' );
+  this.content.$element.append( '<p>' + mw.message('searchdigest-redirect-helptext').text() + '</p>' );
   this.content.$element.append( this.comboBox.$element );
 
   this.comboBox.connect( this, { 'change': 'onComboboxInputChange' } );
@@ -84,6 +84,7 @@ SDRedirectDialog.prototype.getSetupProcess = function ( data ) {
 	return SDRedirectDialog.super.prototype.getSetupProcess.call( this, data )
 	.next( function () {
     this.pageToCreate = data.page;
+    this.$content.find('#sd-ptc').text(data.page);
     this.actions.setAbilities( {
       redirect: false
     } );

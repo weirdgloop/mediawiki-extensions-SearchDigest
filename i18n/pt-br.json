@@ -11,7 +11,7 @@
 	"searchdigest-redirect-problem": "Houve um problema. Esta página pode já ter sido criada.",
 	"searchdigest-redirect-editsummary": "Redirecionado para [[$1]] via [[Special:SearchDigest]]",
 	"searchdigest-redirect-inputplaceholder": "Comece a digitar para sugestões...",
-	"searchdigest-redirect-helptext": "Por favor insira a página para o qual deseja redirecionar.",
+	"searchdigest-redirect-helptext": "Redirecionar <span id='sd-ptc'></span> para onde?",
 	"searchdigest-redirect-redirectbutton": "Redirecionar",
 	"searchdigest-redirect-title": "Pesquisar por páginas"
 }
