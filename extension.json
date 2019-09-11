@@ -4,7 +4,7 @@
 		"[https://github.com/jaydenkieran Jayden Bailey]"
 	],
 	"url": "https://github.com/jaydenkieran/SearchDigest",
-	"version": "1.0",
+	"version": "1.1",
 	"descriptionmsg": "searchdigest-desc",
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
@@ -24,6 +24,36 @@
 	},
 	"SpecialPages": {
 		"SearchDigest": "SpecialSearchDigest"
+	},
+	"ResourceModules": {
+    "ext.searchdigest": {
+        "scripts": [
+            "ext.searchdigest.redirect.js"
+				],
+				"styles": "ext.searchdigest.redirect.css",
+        "messages": [
+						"searchdigest-redirect-buttontext",
+						"searchdigest-redirect-successtext",
+						"searchdigest-redirect-problem",
+						"searchdigest-redirect-editsummary",
+						"searchdigest-redirect-inputplaceholder",
+						"searchdigest-redirect-helptext",
+						"searchdigest-redirect-redirectbutton",
+						"searchdigest-redirect-title",
+						"cancel"
+        ],
+        "dependencies": [
+						"oojs-ui-core",
+						"oojs-ui-windows",
+						"mediawiki.api",
+						"mediawiki.api.edit",
+						"mediawiki.notify"
+        ]
+    }
+	},
+	"ResourceFileModulePaths": {
+    "localBasePath": "src/modules",
+    "remoteExtPath": "SearchDigest/src/modules"
 	},
 	"MessagesDirs": {
 		"SearchDigest": "i18n"

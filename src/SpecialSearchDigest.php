@@ -11,7 +11,9 @@ class SpecialSearchDigest extends QueryPage {
   function execute( $par ) {
     $out = $this->getOutput();
     $out->addWikiText( wfMessage( 'searchdigest-help' )->text() );
-    parent::execute( $par );
+		parent::execute( $par );
+		$out->enableOOUI();
+		$out->addModules( 'ext.searchdigest' );
   }
 
   function isSyndicated() {
@@ -67,11 +69,12 @@ class SpecialSearchDigest extends QueryPage {
 
 		$title = Title::newFromText( $row->sd_query );
 		$link = $this->linkRenderer->makeLink( $title );
-		if ( ( $title->isKnown() === true ) && ( $wgSearchDigestStrikeValidPages === true ) ) {
+		$isKnown = $title->isKnown() === true;
+		if ( ( $isKnown ) && ( $wgSearchDigestStrikeValidPages === true ) ) {
 			$link = '<s>' . $link . '</s>';
 		}
 
-    return $link . ' (' . $row->sd_misses . ')';
+    return $link . ' (' . $row->sd_misses . ') ' . ( $isKnown ? '' : '<span class="sd-cr-btn" data-page="' . htmlspecialchars($row->sd_query, ENT_QUOTES) . '"></span>' );
   }
 
   function getGroupName() {

@@ -5,5 +5,13 @@
 		]
 	},
 	"searchdigest-desc": "Utilizado para rastreamento e exibição de pesquisas falhadas",
-	"searchdigest-help": "Esta página mostra as pesquisas falhadas mais comuns nesta wiki, durante a última semana."
+	"searchdigest-help": "Esta página mostra as pesquisas falhadas mais comuns nesta wiki, durante a última semana.",
+	"searchdigest-redirect-buttontext": "Redirecionar",
+	"searchdigest-redirect-successtext": "$1 redirecionado com sucesso",
+	"searchdigest-redirect-problem": "Houve um problema. Esta página pode já ter sido criada.",
+	"searchdigest-redirect-editsummary": "Redirecionado para [[$1]] via [[Special:SearchDigest]]",
+	"searchdigest-redirect-inputplaceholder": "Comece a digitar para sugestões...",
+	"searchdigest-redirect-helptext": "Redirecionar <span id='sd-ptc'></span> para onde?",
+	"searchdigest-redirect-redirectbutton": "Redirecionar",
+	"searchdigest-redirect-title": "Pesquisar por páginas"
 }

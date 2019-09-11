@@ -8,5 +8,13 @@
 	"searchdigest-desc": "The description used for the SearchDigest extension",
 	"searchdigest-help": "Text displayed at the top of the Special:SearchDigest page",
 	"searchdigest-error-invalid-misses": "Used when displaying an error about an invalid value for misses",
-	"searchdigest-error-invalid-query": "Used when displaying an error about an invalid value for queries"
+	"searchdigest-error-invalid-query": "Used when displaying an error about an invalid value for queries",
+	"searchdigest-redirect-buttontext": "Text used for the create redirect button on Special:SearchDigest",
+	"searchdigest-redirect-successtext": "Text used when a redirect has been successfully created on Special:SearchDigest",
+	"searchdigest-redirect-problem": "Text used when we failed to create a page using the create redirect button on Special:SearchDigest.",
+	"searchdigest-redirect-editsummary": "Text used in the edit summary when creating pages via the create redirect button on Special:SearchDigest",
+	"searchdigest-redirect-inputplaceholder": "Placeholder text used for the input field of the create redirect modal on Special:SearchDigest",
+	"searchdigest-redirect-helptext": "Help text used on the create redirect modal on Special:SearchDigest.",
+	"searchdigest-redirect-redirectbutton": "Text used for the button on the create redirect modal on Special:SearchDigest which will make the redirect when pressed",
+	"searchdigest-redirect-title": "Title used on the create redirect modal on Special:SearchDigest"
 }

@@ -8,5 +8,13 @@
 	"searchdigest-desc": "Used for tracking and displaying missed search queries",
 	"searchdigest-help": "This page displays the most common failed searches on this wiki for the last week.",
 	"searchdigest-error-invalid-misses": "Invalid value for misses: $1 ($2)",
-	"searchdigest-error-invalid-query": "Invalid value for query: $1 ($2)"
+	"searchdigest-error-invalid-query": "Invalid value for query: $1 ($2)",
+	"searchdigest-redirect-buttontext": "Create redirect",
+	"searchdigest-redirect-successtext": "Successfully created redirect for $1",
+	"searchdigest-redirect-problem": "There was a problem. The page may have already been created.",
+	"searchdigest-redirect-editsummary": "Redirected to [[$1]] via [[Special:SearchDigest]]",
+	"searchdigest-redirect-inputplaceholder": "Start typing for suggestions...",
+	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect <span id='sd-ptc'></span> to.",
+	"searchdigest-redirect-redirectbutton": "Redirect",
+	"searchdigest-redirect-title": "Redirect search query"
 }
