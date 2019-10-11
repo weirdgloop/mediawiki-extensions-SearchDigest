@@ -16,5 +16,6 @@
 	"searchdigest-redirect-inputplaceholder": "Placeholder text used for the input field of the create redirect modal on Special:SearchDigest",
 	"searchdigest-redirect-helptext": "Help text used on the create redirect modal on Special:SearchDigest.",
 	"searchdigest-redirect-redirectbutton": "Text used for the button on the create redirect modal on Special:SearchDigest which will make the redirect when pressed",
-	"searchdigest-redirect-title": "Title used on the create redirect modal on Special:SearchDigest"
+	"searchdigest-redirect-title": "Title used on the create redirect modal on Special:SearchDigest",
+	"searchdigest-admintools-help": "Help text for the admin tools displayed on Special:SearchDigest"
 }

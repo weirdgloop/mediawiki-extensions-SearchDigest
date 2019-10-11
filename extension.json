@@ -21,12 +21,16 @@
 		"SearchDigestHooks": "src/SearchDigestHooks.php",
 		"SearchDigestException": "src/SearchDigestException.php",
 		"SearchDigestRecord": "src/SearchDigestRecord.php",
+		"SearchDigestMaintenance": "src/SearchDigestMaintenance.php",
 		"SpecialSearchDigest": "src/SpecialSearchDigest.php"
 	},
 	"SpecialPages": {
 		"SearchDigest": "SpecialSearchDigest"
 	},
 	"ResourceModules": {
+		"ext.searchdigest.styles": {
+			"styles": "ext.searchdigest.styles.css"
+		},
     "ext.searchdigest.redirect": {
         "scripts": [
             "ext.searchdigest.redirect.js"
@@ -62,5 +66,8 @@
 	"Hooks": {
 		"LoadExtensionSchemaUpdates": "SearchDigestHooks::onLoadExtensionSchemaUpdates",
 		"SpecialSearchNogomatch": "SearchDigestHooks::onSpecialSearchNogomatch"
-	}
+	},
+	"AvailableRights": [
+		"searchdigest-admin"
+	]
 }

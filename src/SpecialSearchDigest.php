@@ -11,15 +11,76 @@ class SpecialSearchDigest extends QueryPage {
   function execute( $par ) {
 		global $wgSearchDigestCreateRedirect;
 
-    $out = $this->getOutput();
-    $out->addWikiText( wfMessage( 'searchdigest-help' )->text() );
+		// Add intro text before we execute parent function so that it renders before
+		$out = $this->getOutput();
+		$out->addModuleStyles( [ 'ext.searchdigest.styles' ] );
+		$out->addWikiText( wfMessage( 'searchdigest-help' )->text() );
+
 		parent::execute( $par );
+
 		$out->enableOOUI();
-		
+
+		// If the user has the searchdigest-admin permission, add admin tools to page
+		if ( $this->getUser()->isAllowed( 'searchdigest-admin' ) ) {
+			$out->addModuleStyles( [ 'oojs-ui.styles.icons-moderation' ] );
+
+			$out->addHtml('<div class="sd-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->plain() . '</p>');
+			$this->createAdminForm();
+			$out->addHtml('</div>');
+
+			// $btnGrp = new OOUI\ButtonGroupWidget( [
+			// 	'items' => [
+			// 		new OOUI\ButtonWidget( [
+			// 			'infusable' => true,
+			// 			'icon' => 'trash',
+			// 			'label' => wfMessage( 'searchdigest-admintools-clear' )->plain()
+			// 		] )
+			// 	]
+			// ] );
+			// $out->addHtml('<div class="sd-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->plain() . '</p>' . $btnGrp . '</div>');
+		}
+
+		// Additional client JS for redirect button
 		if ( $wgSearchDigestCreateRedirect === true ) {
 			$out->addModules( 'ext.searchdigest.redirect' );
 		}
-  }
+	}
+	
+	function createAdminForm () {
+		$desc = [
+			'select' => [
+        'type' => 'select',
+        'options' => [
+						'Remove old entries from database table' => 'rmold',
+            'Clear database table (!!!)' => 'dbwipe'
+        ]
+			]
+		];
+		$form = HTMLForm::factory( 'ooui', $desc, $this->getContext(), 'searchdigest' );
+		$form
+			->setSubmitText( 'Perform action' )
+			->setSubmitDestructive()
+			->setSubmitCallback( [ $this, 'handleFormAction' ] )
+			->show();
+	}
+
+	public function handleFormAction( $formData ) {
+		// redundancy permission check
+		if ( $this->getUser()->isAllowed( 'searchdigest-admin' ) ) {
+			$maint = new SearchDigestMaintenance();
+			switch ( $formData[ 'select' ] ) {
+				case 'rmold':
+					$maint->removeOldEntries();
+					break;
+				case 'dbwipe':
+					$maint->doTableWipe();
+					break;
+			};
+			return false;
+		} else {
+			return 'searchdigest-admintools-noperms';
+		};
+	}
 
   function isSyndicated() {
     return false;
