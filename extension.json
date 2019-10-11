@@ -10,7 +10,8 @@
 	"manifest_version": 1,
 	"config": {
 		"SearchDigestSafe": true,
-		"SearchDigestStrikeValidPages": true
+		"SearchDigestStrikeValidPages": true,
+		"SearchDigestCreateRedirect": true
 	},
 	"type": "other",
 	"requires": {
@@ -26,7 +27,7 @@
 		"SearchDigest": "SpecialSearchDigest"
 	},
 	"ResourceModules": {
-    "ext.searchdigest": {
+    "ext.searchdigest.redirect": {
         "scripts": [
             "ext.searchdigest.redirect.js"
 				],

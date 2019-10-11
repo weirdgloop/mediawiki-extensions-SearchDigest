@@ -9,11 +9,16 @@ class SpecialSearchDigest extends QueryPage {
   }
 
   function execute( $par ) {
+		global $wgSearchDigestCreateRedirect;
+
     $out = $this->getOutput();
     $out->addWikiText( wfMessage( 'searchdigest-help' )->text() );
 		parent::execute( $par );
 		$out->enableOOUI();
-		$out->addModules( 'ext.searchdigest' );
+		
+		if ( $wgSearchDigestCreateRedirect === true ) {
+			$out->addModules( 'ext.searchdigest.redirect' );
+		}
   }
 
   function isSyndicated() {
