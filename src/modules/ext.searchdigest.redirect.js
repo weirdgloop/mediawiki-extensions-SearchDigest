@@ -131,14 +131,14 @@ SDRedirectDialog.prototype.getTeardownProcess = function ( data ) {
       pageLink.contents().unwrap().wrap('<s></s>');
       // finally, remove the button span
       btnSpan.remove();
+    };
 
-      self.comboBox.setValue('');
-      self.comboBox.setOptions([]);
-      if (self.comboBox.getMenu().isVisible()) {
-        // because of weird clipping bugs
-        self.comboBox.getMenu().toggle();
-      };
-    }
+    self.comboBox.setValue('');
+    self.comboBox.setOptions([]);
+    if (self.comboBox.getMenu().isVisible()) {
+      // because of weird clipping bugs
+      self.comboBox.getMenu().toggle();
+    };
 	}, this );
 }
 
