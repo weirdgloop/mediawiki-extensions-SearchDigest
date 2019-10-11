@@ -1,6 +1,5 @@
 /**
  * Additional script for SearchDigest to allow users to make quick redirects
- * Suggestions depend on the LinkSuggest extension being installed
  * @author Jayden Bailey
  */
 
@@ -54,24 +53,25 @@ SDRedirectDialog.prototype.onComboboxInputChange = function ( value ) {
   } );
   var self = this;
   if (value.length) {
-    // Input not empty, let's try search suggesting using LinkSuggest API
+    // Input not empty, let's try search suggesting using the opensearch API
     api = new mw.Api();
     api.get( {
-      action: 'linksuggest',
-      get: 'suggestions',
-      query: value,
+      action: 'opensearch',
+      search: value,
+      redirects: 'resolve',
+      limit: 10,
       maxage: 900,
       smaxage: 900
     } ).done( function( data ) {
-      let opts = []
-      if (!data.error && data.linksuggest.result.suggestions.length) {
-        let suggestions = data.linksuggest.result.suggestions;
+      let opts = [];
+      if (data && !data.error && data[1].length) {
+        let suggestions = data[1];
         for (i=0; i < suggestions.length; i++) {
           opts.push({ data: suggestions[i] })
         };
         self.comboBox.setOptions(opts);
-      };
-    } );
+      }
+    });
   };
 };
 

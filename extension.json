@@ -1,9 +1,9 @@
 {
 	"name": "SearchDigest",
 	"author": [
-		"[https://github.com/jaydenkieran Jayden Bailey]"
+		"[https://twitter.com/jaydenkieran Jayden Bailey]"
 	],
-	"url": "https://github.com/jaydenkieran/SearchDigest",
+	"url": "https://gitlab.com/weirdgloop/extensions/searchdigest",
 	"version": "1.1",
 	"descriptionmsg": "searchdigest-desc",
 	"license-name": "GPL-3.0+",
