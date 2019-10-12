@@ -51,14 +51,14 @@ class SpecialSearchDigest extends QueryPage {
 			'select' => [
         'type' => 'select',
         'options' => [
-						'Remove old entries from database table' => 'rmold',
-            'Clear database table (!!!)' => 'dbwipe'
+						wfMessage( 'searchdigest-admintools-rmold' )->plain() => 'rmold',
+            wfMessage( 'searchdigest-admintools-dbwipe' )->plain() => 'dbwipe'
         ]
 			]
 		];
 		$form = HTMLForm::factory( 'ooui', $desc, $this->getContext(), 'searchdigest' );
 		$form
-			->setSubmitText( 'Perform action' )
+			->setSubmitText( wfMessage( 'searchdigest-admintools-submit' )->plain() )
 			->setSubmitDestructive()
 			->setSubmitCallback( [ $this, 'handleFormAction' ] )
 			->show();
