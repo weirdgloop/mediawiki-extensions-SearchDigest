@@ -19,5 +19,8 @@
 	"searchdigest-redirect-title": "Redirect search query",
 	"searchdigest-admintools-noperms": "You do not have permission to do this.",
 	"searchdigest-admintools-help": "The following special tools are destructive and will make drastic changes to the database tables for SearchDigest. Be careful.",
+	"searchdigest-admintools-rmold": "Remove old entries from database table",
+	"searchdigest-admintools-dbwipe": "Clear database table (!!!)",
+	"searchdigest-admintools-submit": "Perform action",
 	"right-searchdigest-admin": "Access administration tasks (SearchDigest)"
 }
