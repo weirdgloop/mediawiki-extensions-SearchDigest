@@ -16,5 +16,8 @@
 	"searchdigest-redirect-inputplaceholder": "Start typing for suggestions...",
 	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect <span id='sd-ptc'></span> to.",
 	"searchdigest-redirect-redirectbutton": "Redirect",
-	"searchdigest-redirect-title": "Redirect search query"
+	"searchdigest-redirect-title": "Redirect search query",
+	"searchdigest-admintools-noperms": "You do not have permission to do this.",
+	"searchdigest-admintools-help": "The following special tools are destructive and will make drastic changes to the database tables for SearchDigest. Be careful.",
+	"right-searchdigest-admin": "Access administration tasks (SearchDigest)"
 }

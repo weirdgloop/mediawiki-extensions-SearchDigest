@@ -1,16 +1,17 @@
 {
 	"name": "SearchDigest",
 	"author": [
-		"[https://github.com/jaydenkieran Jayden Bailey]"
+		"[https://twitter.com/jaydenkieran Jayden Bailey]"
 	],
-	"url": "https://github.com/jaydenkieran/SearchDigest",
+	"url": "https://gitlab.com/weirdgloop/extensions/searchdigest",
 	"version": "1.1",
 	"descriptionmsg": "searchdigest-desc",
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
 		"SearchDigestSafe": true,
-		"SearchDigestStrikeValidPages": true
+		"SearchDigestStrikeValidPages": true,
+		"SearchDigestCreateRedirect": true
 	},
 	"type": "other",
 	"requires": {
@@ -20,13 +21,17 @@
 		"SearchDigestHooks": "src/SearchDigestHooks.php",
 		"SearchDigestException": "src/SearchDigestException.php",
 		"SearchDigestRecord": "src/SearchDigestRecord.php",
+		"SearchDigestMaintenance": "src/SearchDigestMaintenance.php",
 		"SpecialSearchDigest": "src/SpecialSearchDigest.php"
 	},
 	"SpecialPages": {
 		"SearchDigest": "SpecialSearchDigest"
 	},
 	"ResourceModules": {
-    "ext.searchdigest": {
+		"ext.searchdigest.styles": {
+			"styles": "ext.searchdigest.styles.css"
+		},
+    "ext.searchdigest.redirect": {
         "scripts": [
             "ext.searchdigest.redirect.js"
 				],
@@ -61,5 +66,8 @@
 	"Hooks": {
 		"LoadExtensionSchemaUpdates": "SearchDigestHooks::onLoadExtensionSchemaUpdates",
 		"SpecialSearchNogomatch": "SearchDigestHooks::onSpecialSearchNogomatch"
-	}
+	},
+	"AvailableRights": [
+		"searchdigest-admin"
+	]
 }
