@@ -87,12 +87,14 @@ class SpecialSearchDigest extends QueryPage {
   }
 
   function getQueryInfo() {
+		global $wgSearchDigestMinimumMisses;
+
 		// Get the date one week ago
 		$dateLimit = date( 'Y-m-d', ( wfTimestamp( TS_UNIX ) - 604800 ) );
 		return [
 			'tables' => [ 'searchdigest' ],
 			'fields' => [ 'sd_query', 'sd_misses' ],
-			'conds' => [ 'sd_touched > ' . $this->getRecacheDB()->addQuotes( $dateLimit ) ],
+			'conds' => [ 'sd_touched > ' . $this->getRecacheDB()->addQuotes( $dateLimit ) . ' AND sd_misses >= ' . $wgSearchDigestMinimumMisses ],
     ];
   }
 
