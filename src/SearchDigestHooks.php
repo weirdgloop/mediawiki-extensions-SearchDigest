@@ -22,6 +22,7 @@ class SearchDigestHooks {
 
 		$query = $title->getFullText();
 		$query = trim(mb_convert_encoding($query, 'UTF-8'));
+		wfDebugLog( 'searchdigest', "Preparing to record missed query: {$query}" );
 
 		$record = SearchDigestRecord::getFromQuery( $query );
 		if ( $record === null ) {

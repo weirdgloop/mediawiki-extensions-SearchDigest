@@ -14,7 +14,7 @@ class SpecialSearchDigest extends QueryPage {
 		// Add intro text before we execute parent function so that it renders before
 		$out = $this->getOutput();
 		$out->addModuleStyles( [ 'ext.searchdigest.styles' ] );
-		$out->addWikiText( wfMessage( 'searchdigest-help' )->text() );
+		$out->addWikiTextAsInterface( wfMessage( 'searchdigest-help' )->text() );
 
 		parent::execute( $par );
 
