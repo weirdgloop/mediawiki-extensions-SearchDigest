@@ -50,9 +50,7 @@
         "dependencies": [
 						"oojs-ui-core",
 						"oojs-ui-windows",
-						"mediawiki.api",
-						"mediawiki.api.edit",
-						"mediawiki.notify"
+						"mediawiki.api"
         ]
     }
 	},

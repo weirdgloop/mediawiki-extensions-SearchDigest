@@ -110,6 +110,7 @@ SDRedirectDialog.prototype.getActionProcess = function ( action ) {
         self.close( { page: self.pageToCreate } );
       }).fail( function(data) {
         OO.ui.alert( mw.message('searchdigest-redirect-problem').escaped() );
+        self.close( { page: self.pageToCreate } );
       });
 		}, this );
 	}
