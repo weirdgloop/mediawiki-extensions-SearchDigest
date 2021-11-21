@@ -45,18 +45,10 @@ class SearchDigestHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchNogomatch
 	 */
 	public static function onSpecialSearchNogomatch ( &$title ) {
-		global $wgSearchDigestSafe;
-
-		if ($wgSearchDigestSafe === true) {
-			// Allow running this with try/catch wrapped
-			// to avoid breaking search completely if something goes wrong
-			try {
-				SearchDigestHooks::reallyDoSpecialSearchNogomatch( $title );
-			} catch (Exception $e) {
-				wfDebugLog( 'searchdigest', "Problem with logging failed go search for {$title->getFullText()}. Exception: {$e->getMessage()}" );
-			}
-		} else {
+		try {
 			SearchDigestHooks::reallyDoSpecialSearchNogomatch( $title );
+		} catch (Exception $e) {
+			wfDebugLog( 'searchdigest', "Problem with logging failed go search for {$title->getFullText()}. Exception: {$e->getMessage()}" );
 		}
 
 		return true;

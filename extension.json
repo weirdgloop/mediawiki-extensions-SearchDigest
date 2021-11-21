@@ -9,14 +9,13 @@
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
-		"SearchDigestSafe": true,
 		"SearchDigestStrikeValidPages": true,
 		"SearchDigestCreateRedirect": true,
 		"SearchDigestMinimumMisses": 10	
 	},
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.31.0"
+		"MediaWiki": ">= 1.36.0"
 	},
 	"AutoloadClasses": {
 		"SearchDigestHooks": "src/SearchDigestHooks.php",

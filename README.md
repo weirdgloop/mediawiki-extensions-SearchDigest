@@ -4,7 +4,7 @@ MediaWiki extension which tracks failed searches on your wiki and displays them 
 **Live demo**: https://runescape.wiki
 
 ## Requirements
-- **MediaWiki 1.31+**
+Please use the appropriate release branch for your MediaWiki version.
 
 ## Installation
 
@@ -20,7 +20,6 @@ wfLoadExtension( 'SearchDigest' );
 ## Configuration
 | Variable | Type | Description | Default |
 | --- | --- | --- | --- |
-| `$wgSearchDigestSafe` | bool | Whether to wrap some extension functionality in try/catch statements to avoid breaking Special:Search if something goes wrong | `true`
 | `$wgSearchDigestStrikeValidPages` | bool | Whether to strike out valid pages (pages that exist) on the special page | `true`
 | `$wgSearchDigestCreateRedirect` | bool | Whether to show a button for quickly creating redirects on Special:SearchDigest (requires JS in browser) | `true`
 | `$wgSearchDigestMinimumMisses` | int | Number of misses for a query before they should show up on Special:SearchDigest | `10`
