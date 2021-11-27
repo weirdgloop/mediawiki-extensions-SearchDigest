@@ -112,7 +112,7 @@ class SearchDigestRecord {
       self::TABLE_NAME,
       $vals,
       [
-        'sd_query'
+        [ 'sd_query' ]
       ],
       $vals,
       __METHOD__
