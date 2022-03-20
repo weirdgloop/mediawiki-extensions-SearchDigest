@@ -107,7 +107,7 @@ class SearchDigestRecord {
       'sd_touched' => $this->getTouched()
     ];
 
-    $dbw = wfGetDB( DB_MASTER );
+    $dbw = wfGetDB( DB_PRIMARY );
     $dbw->upsert(
       self::TABLE_NAME,
       $vals,

@@ -25,7 +25,7 @@ class PopulateDummySearchDigest extends Maintenance {
   }
 
 	public function execute() {
-		$db = $this->getDB( DB_MASTER );
+		$db = $this->getDB( DB_PRIMARY );
 
     for ($x = 0; $x <= 1000; $x++) {
       $vals = [
@@ -34,7 +34,7 @@ class PopulateDummySearchDigest extends Maintenance {
         'sd_touched' => date("Y-m-d H:i:s")
       ];
   
-      $dbw = wfGetDB( DB_MASTER );
+      $dbw = wfGetDB( DB_PRIMARY );
       $dbw->upsert(
         'searchdigest',
         $vals,
