@@ -29,7 +29,6 @@ class PopulateDummySearchDigest extends Maintenance {
 
     for ($x = 0; $x <= 1000; $x++) {
       $vals = [
-        'sd_query' => $this->generateRandomString(),
         'sd_misses' => rand( 1, 2000 ),
         'sd_touched' => date("Y-m-d H:i:s")
       ];
@@ -37,7 +36,9 @@ class PopulateDummySearchDigest extends Maintenance {
       $dbw = wfGetDB( DB_PRIMARY );
       $dbw->upsert(
         'searchdigest',
-        $vals,
+        [
+          'sd_query' => $this->generateRandomString()
+        ] + $vals,
         [
           'sd_query'
         ],
