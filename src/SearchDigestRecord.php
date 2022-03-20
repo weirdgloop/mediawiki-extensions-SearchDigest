@@ -102,7 +102,6 @@ class SearchDigestRecord {
 
   public function save () {
     $vals = [
-      'sd_query' => $this->getQuery(),
       'sd_misses' => $this->getMisses(),
       'sd_touched' => $this->getTouched()
     ];
@@ -110,7 +109,9 @@ class SearchDigestRecord {
     $dbw = wfGetDB( DB_PRIMARY );
     $dbw->upsert(
       self::TABLE_NAME,
-      $vals,
+      [
+        'sd_query' => $this->getQuery()
+      ] + $vals,
       [
         [ 'sd_query' ]
       ],
