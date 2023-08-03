@@ -35,7 +35,7 @@ SDRedirectDialog.prototype.initialize = function () {
   this.comboBox = new OO.ui.ComboBoxInputWidget( {
     value: '',
     options: [],
-    $overlay: true,
+    $overlay: this.$overlay,
     placeholder: mw.message('searchdigest-redirect-inputplaceholder').escaped()
   } );
   this.content.$element.append( '<p>' + mw.message('searchdigest-redirect-helptext').text() + '</p>' );
