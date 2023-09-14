@@ -1,5 +1,7 @@
 <?php
 
+namespace MediaWiki\Extension\SearchDigest;
+
 class SearchDigestJob extends Job implements GenericParameterJob {
 	/** @var Title */
 	protected $title;

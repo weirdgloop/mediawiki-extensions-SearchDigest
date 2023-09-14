@@ -61,9 +61,14 @@
 	"MessagesDirs": {
 		"SearchDigest": "i18n"
 	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\SearchDigest\\SearchDigestHooks"
+		}
+	},
 	"Hooks": {
-		"LoadExtensionSchemaUpdates": "MediaWiki\\Extension\\SearchDigest\\SearchDigestHooks::onLoadExtensionSchemaUpdates",
-		"SpecialSearchNogomatch": "MediaWiki\\Extension\\SearchDigest\\SearchDigestHooks::onSpecialSearchNogomatch"
+		"LoadExtensionSchemaUpdates": "main",
+		"SpecialSearchNogomatch": "main"
 	},
 	"AvailableRights": [
 		"searchdigest-admin"

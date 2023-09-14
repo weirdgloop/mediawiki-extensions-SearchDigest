@@ -1,5 +1,7 @@
 <?php
 
+namespace MediaWiki\Extension\SearchDigest;
+
 use MediaWiki\MediaWikiServices;
 
 class SearchDigestRecord {

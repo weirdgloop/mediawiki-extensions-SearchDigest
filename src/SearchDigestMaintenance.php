@@ -1,5 +1,7 @@
 <?php
 
+namespace MediaWiki\Extension\SearchDigest;
+
 /**
  * Maintenance functions for SearchDigest
  */

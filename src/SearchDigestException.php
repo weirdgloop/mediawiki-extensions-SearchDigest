@@ -1,5 +1,7 @@
 <?php
 
+namespace MediaWiki\Extension\SearchDigest;
+
 class SearchDigestException extends Exception {
   public function __construct( Message $message, $code = 0, Exception $previous = null ) {
 		$this->parsedMessage = $message->parse();

@@ -1,5 +1,7 @@
 <?php
 
+namespace MediaWiki\Extension\SearchDigest;
+
 use MediaWiki\MediaWikiServices;
 
 class SpecialSearchDigest extends QueryPage {
@@ -45,7 +47,7 @@ class SpecialSearchDigest extends QueryPage {
 			$out->addModules( 'ext.searchdigest.redirect' );
 		}
 	}
-	
+
 	function createAdminForm () {
 		$desc = [
 			'select' => [
@@ -127,11 +129,11 @@ class SpecialSearchDigest extends QueryPage {
     );
 		return $res;
   }
-  
+
   function getOrderFields() {
     return [ 'sd_misses' ];
   }
-  
+
   function formatResult( $skin, $row ) {
 		global $wgSearchDigestStrikeValidPages;
 
