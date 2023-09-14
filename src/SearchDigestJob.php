@@ -2,6 +2,11 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
+use Exception;
+use Job;
+use GenericParameterJob;
+use Title;
+
 class SearchDigestJob extends Job implements GenericParameterJob {
 	/** @var Title */
 	protected $title;
@@ -37,7 +42,7 @@ class SearchDigestJob extends Job implements GenericParameterJob {
 
 			$record->setTouched( date("Y-m-d H:i:s") );
 			$record->save();
-		} catch (Exception $e) {
+		} catch ( Exception $e ) {
 			wfDebugLog( 'searchdigest', "Problem with logging failed go search for {$title->getFullText()}. Exception: {$e->getMessage()}" );
 		}
 	}

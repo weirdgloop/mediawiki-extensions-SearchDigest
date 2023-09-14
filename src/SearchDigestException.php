@@ -2,22 +2,11 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
-class SearchDigestException extends Exception {
-  public function __construct( Message $message, $code = 0, Exception $previous = null ) {
-		$this->parsedMessage = $message->parse();
-		parent::__construct( $this->parsedMessage, $code, $previous );
-	}
+use Exception;
+use Message;
 
-	/**
-	 * Get the message text.
-	 *
-	 * For some reason, php decides to add the stack trace to the exception message
-	 * which make it unsuitable for being used for user-facing errors.
-	 * This removes that issue.
-	 *
-	 * @return string
-	 */
-	public function getParsedMessage() {
-		return $this->parsedMessage();
+class SearchDigestException extends Exception {
+  public function __construct( Message $message, $code = 0, $previous = null ) {
+		parent::__construct( $message, $code, $previous );
 	}
 }

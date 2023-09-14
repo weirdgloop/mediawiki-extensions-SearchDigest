@@ -2,12 +2,25 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
+use IDatabase;
+use MediaWiki\MediaWikiServices;
+
 /**
  * Maintenance functions for SearchDigest
  */
 class SearchDigestMaintenance {
-  public function __construct() {
-    $this->dbw = wfGetDB( DB_PRIMARY );
+	/**
+	 * @var IDatabase
+	 */
+	private IDatabase $dbw;
+
+	/**
+	 * @var string
+	 */
+	private string $table;
+
+	public function __construct() {
+    $this->dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB()->getConnection( DB_PRIMARY );
     $this->table = 'searchdigest';
   }
 

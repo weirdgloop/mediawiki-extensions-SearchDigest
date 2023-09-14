@@ -2,7 +2,10 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
+use HTMLForm;
 use MediaWiki\MediaWikiServices;
+use QueryPage;
+use Title;
 
 class SpecialSearchDigest extends QueryPage {
   function __construct() {
@@ -81,7 +84,7 @@ class SpecialSearchDigest extends QueryPage {
 			return false;
 		} else {
 			return 'searchdigest-admintools-noperms';
-		};
+		}
 	}
 
   function isSyndicated() {

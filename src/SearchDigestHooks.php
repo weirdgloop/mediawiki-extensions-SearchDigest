@@ -2,6 +2,8 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
+use DatabaseUpdater;
+use DeferredUpdates;
 use MediaWiki\MediaWikiServices;
 
 /**

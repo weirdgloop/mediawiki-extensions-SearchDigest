@@ -2,6 +2,7 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
+use IDatabase;
 use MediaWiki\MediaWikiServices;
 
 class SearchDigestRecord {
