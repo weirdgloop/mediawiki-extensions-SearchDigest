@@ -5,28 +5,22 @@ namespace MediaWiki\Extension\SearchDigest;
 use Exception;
 use Job;
 use GenericParameterJob;
-use Title;
 
 class SearchDigestJob extends Job implements GenericParameterJob {
-	/** @var Title */
-	protected $title;
+	/** @var string */
+	protected $query;
 
-	public function __construct( $params = null ) {
-		parent::__construct( 'SearchDigest', $params );
+	public function __construct( $params ) {
+		parent::__construct( 'SearchDigestJob', $params );
 
-		$this->title = $params['title'];
+		$this->query = $params['query'];
 	}
 
 	public function run() {
-		$title = $this->title;
+		$query = $this->query;
 
 		try {
-			if ( !is_object( $title ) ) {
-				return;
-			}
-
-			$query = $title->getFullText();
-			$query = trim(mb_convert_encoding($query, 'UTF-8'));
+			$query = trim( mb_convert_encoding( $query, 'UTF-8' ) );
 			wfDebugLog( 'searchdigest', "Preparing to record missed query: $query" );
 
 			$record = SearchDigestRecord::newFromQuery( $query );
@@ -43,7 +37,7 @@ class SearchDigestJob extends Job implements GenericParameterJob {
 			$record->setTouched( date("Y-m-d H:i:s") );
 			$record->save();
 		} catch ( Exception $e ) {
-			wfDebugLog( 'searchdigest', "Problem with logging failed go search for {$title->getFullText()}. Exception: {$e->getMessage()}" );
+			wfDebugLog( 'searchdigest', "Problem with logging failed go search for \"$query\". Exception: {$e->getMessage()}" );
 		}
 	}
 }
