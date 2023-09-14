@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Hooks for the SearchDigest extension
  *
@@ -19,33 +21,14 @@ class SearchDigestHooks {
 	 * Called when the Special:Search 'go' feature is triggered and the target page doesn't exist
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchNogomatch
 	 */
-	public static function onSpecialSearchNogomatch ( &$title ) {
+	public static function onSpecialSearchNogomatch ( $title ) {
 		DeferredUpdates::addCallableUpdate( static function () use ( $title ) {
-			try {
-				if ( !is_object( $title ) ) {
-					return;
-				}
-
-				$query = $title->getFullText();
-				$query = trim(mb_convert_encoding($query, 'UTF-8'));
-				wfDebugLog( 'searchdigest', "Preparing to record missed query: {$query}" );
-
-				$record = SearchDigestRecord::getFromQuery( $query );
-				if ( $record === null ) {
-					$record = new SearchDigestRecord();
-					$record->setQuery( $query );
-					$record->setMisses( 1 );
-				} else {
-					$misses = $record->getMisses();
-					$misses++;
-					$record->setMisses( $misses );
-				}
-
-				$record->setTouched( date("Y-m-d H:i:s") );
-				$record->save();
-			} catch (Exception $e) {
-				wfDebugLog( 'searchdigest', "Problem with logging failed go search for {$title->getFullText()}. Exception: {$e->getMessage()}" );
-			}
+			// Schedule a job to update the count for this page, keeping search requests idempotent.
+			MediaWikiServices::getInstance()->getJobQueueGroup()->push(
+				new SearchDigestJob( [
+					'title' => $title
+				] )
+			);
 		} );
 	}
 }

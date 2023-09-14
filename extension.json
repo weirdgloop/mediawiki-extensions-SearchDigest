@@ -1,31 +1,28 @@
 {
 	"name": "SearchDigest",
 	"author": [
-		"[https://twitter.com/jaydenkieran Jayden Bailey]"
+		"[https://github.com/jayktaylor Jayden Bailey]",
+		"..."
 	],
-	"url": "https://gitlab.com/weirdgloop/extensions/searchdigest",
-	"version": "1.2",
+	"url": "https://github.com/weirdgloop/mediawiki-extensions-SearchDigest",
+	"version": "1.3",
 	"descriptionmsg": "searchdigest-desc",
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
 		"SearchDigestStrikeValidPages": true,
 		"SearchDigestCreateRedirect": true,
-		"SearchDigestMinimumMisses": 10	
+		"SearchDigestMinimumMisses": 10
 	},
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.36.0"
+		"MediaWiki": ">= 1.38.0"
 	},
-	"AutoloadClasses": {
-		"SearchDigestHooks": "src/SearchDigestHooks.php",
-		"SearchDigestException": "src/SearchDigestException.php",
-		"SearchDigestRecord": "src/SearchDigestRecord.php",
-		"SearchDigestMaintenance": "src/SearchDigestMaintenance.php",
-		"SpecialSearchDigest": "src/SpecialSearchDigest.php"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\SearchDigest\\": "src/"
 	},
 	"SpecialPages": {
-		"SearchDigest": "SpecialSearchDigest"
+		"SearchDigest": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigest"
 	},
 	"ResourceModules": {
 		"ext.searchdigest.styles": {
@@ -54,6 +51,9 @@
         ]
     }
 	},
+	"JobClasses": {
+		"SearchDigestJob": "MediaWiki\\Extension\\SearchDigest\\SearchDigestJob"
+	},
 	"ResourceFileModulePaths": {
     "localBasePath": "src/modules",
     "remoteExtPath": "SearchDigest/src/modules"
@@ -62,8 +62,8 @@
 		"SearchDigest": "i18n"
 	},
 	"Hooks": {
-		"LoadExtensionSchemaUpdates": "SearchDigestHooks::onLoadExtensionSchemaUpdates",
-		"SpecialSearchNogomatch": "SearchDigestHooks::onSpecialSearchNogomatch"
+		"LoadExtensionSchemaUpdates": "MediaWiki\\Extension\\SearchDigest\\SearchDigestHooks::onLoadExtensionSchemaUpdates",
+		"SpecialSearchNogomatch": "MediaWiki\\Extension\\SearchDigest\\SearchDigestHooks::onSpecialSearchNogomatch"
 	},
 	"AvailableRights": [
 		"searchdigest-admin"

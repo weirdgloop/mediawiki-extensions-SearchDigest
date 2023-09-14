@@ -1,11 +1,20 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class SearchDigestRecord {
   private const TABLE_NAME = 'searchdigest';
 
   private $query;
   private $misses;
   private $touched;
+
+  /** @var IDatabase */
+  private IDatabase $dbw;
+
+  public function __construct() {
+	  $this->dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB()->getConnection( DB_PRIMARY );
+  }
 
   /**
    * Get the search query associated with this record
@@ -67,13 +76,13 @@ class SearchDigestRecord {
    * @param string
    * @return SearchDigestRecord|null
    */
-  public static function getFromQuery( $query ) {
+  public static function newFromQuery( $query ) {
     if ( !is_string( $query ) ) {
-      $msg = wfMessage( 'searchdigest-error-invalid-query', $val, gettype( $val ) );
+      $msg = wfMessage( 'searchdigest-error-invalid-query', $query, gettype( $query ) );
       throw new SearchDigestException ( $msg );
     }
 
-    $dbw = wfGetDB( DB_REPLICA );
+    $dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB()->getConnection( DB_PRIMARY );
     $res = $dbw->select(
       self::TABLE_NAME,
       [
@@ -106,8 +115,7 @@ class SearchDigestRecord {
       'sd_touched' => $this->getTouched()
     ];
 
-    $dbw = wfGetDB( DB_PRIMARY );
-    $dbw->upsert(
+    $this->dbw->upsert(
       self::TABLE_NAME,
       [
         'sd_query' => $this->getQuery()
