@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bilin Tsui"
+		]
+	},
+	"searchdigest-desc": "追踪并列出失败的搜索查询",
+	"searchdigest-help": "此页面列出了上一周此wiki上最常见的失败搜索。",
+	"searchdigest-error-invalid-misses": "无效的失败搜索值：$1（$2）",
+	"searchdigest-error-invalid-query": "无效的查询值：$1（$2）",
+	"searchdigest-redirect-buttontext": "创建重定向",
+	"searchdigest-redirect-successtext": "成功为$1创建了重定向",
+	"searchdigest-redirect-problem": "出现了错误。页面可能已被创建。",
+	"searchdigest-redirect-editsummary": "通过[[Special:SearchDigest]]重定向到[[$1]]",
+	"searchdigest-redirect-inputplaceholder": "重定向目标",
+	"searchdigest-redirect-helptext": "请输入您想将<span id='sd-ptc'></span>重定向到的页面：",
+	"searchdigest-redirect-redirectbutton": "创建",
+	"searchdigest-redirect-title": "创建重定向",
+	"searchdigest-admintools-noperms": "您无权执行此操作。",
+	"searchdigest-admintools-help": "小心！下列特殊工具有破坏性，且会对SearchDigest数据库表进行重大更改。",
+	"searchdigest-admintools-rmold": "从数据库表中删除旧条目",
+	"searchdigest-admintools-dbwipe": "清除数据库表（'''危险'''）",
+	"searchdigest-admintools-submit": "执行操作",
+	"right-searchdigest-admin": "访问SearchDigest的管理任务"
+}
