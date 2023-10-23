@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jayden Bailey"
+			"Jayden Bailey",
+			"Bilin Tsui"
 		]
 	},
 	"searchdigest": "SearchDigest",
@@ -13,7 +14,7 @@
 	"searchdigest-redirect-successtext": "Successfully created redirect for $1",
 	"searchdigest-redirect-problem": "There was a problem. The page may have already been created.",
 	"searchdigest-redirect-editsummary": "Redirected to [[$1]] via [[Special:SearchDigest]]",
-	"searchdigest-redirect-inputplaceholder": "Redirect target",
+	"searchdigest-redirect-inputplaceholder": "Typing redirect target here...",
 	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect <span id='sd-ptc'></span> to:",
 	"searchdigest-redirect-redirectbutton": "Create",
 	"searchdigest-redirect-title": "Create redirect",

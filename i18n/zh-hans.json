@@ -12,7 +12,7 @@
 	"searchdigest-redirect-successtext": "成功为$1创建了重定向",
 	"searchdigest-redirect-problem": "出现了错误。页面可能已被创建。",
 	"searchdigest-redirect-editsummary": "通过[[Special:SearchDigest]]重定向到[[$1]]",
-	"searchdigest-redirect-inputplaceholder": "重定向目标",
+	"searchdigest-redirect-inputplaceholder": "输入重定向目标",
 	"searchdigest-redirect-helptext": "请输入您想将<span id='sd-ptc'></span>重定向到的页面：",
 	"searchdigest-redirect-redirectbutton": "创建",
 	"searchdigest-redirect-title": "创建重定向",
