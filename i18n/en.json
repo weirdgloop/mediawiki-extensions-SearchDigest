@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jayden Bailey"
+			"Jayden Bailey",
+			"Bilin Tsui"
 		]
 	},
 	"searchdigest": "SearchDigest",
@@ -13,10 +14,10 @@
 	"searchdigest-redirect-successtext": "Successfully created redirect for $1",
 	"searchdigest-redirect-problem": "There was a problem. The page may have already been created.",
 	"searchdigest-redirect-editsummary": "Redirected to [[$1]] via [[Special:SearchDigest]]",
-	"searchdigest-redirect-inputplaceholder": "Start typing for suggestions...",
-	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect <span id='sd-ptc'></span> to.",
-	"searchdigest-redirect-redirectbutton": "Redirect",
-	"searchdigest-redirect-title": "Redirect search query",
+	"searchdigest-redirect-inputplaceholder": "Typing redirect target here...",
+	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect <span id='sd-ptc'></span> to:",
+	"searchdigest-redirect-redirectbutton": "Create",
+	"searchdigest-redirect-title": "Create redirect",
 	"searchdigest-admintools-noperms": "You do not have permission to do this.",
 	"searchdigest-admintools-help": "The following special tools are destructive and will make drastic changes to the database tables for SearchDigest. Be careful.",
 	"searchdigest-admintools-rmold": "Remove old entries from database table",
