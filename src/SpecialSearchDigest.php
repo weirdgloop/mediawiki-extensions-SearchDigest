@@ -141,6 +141,12 @@ class SpecialSearchDigest extends QueryPage {
 		global $wgSearchDigestStrikeValidPages;
 
 		$title = Title::newFromText( $row->sd_query );
+
+		if ( $title === null ) {
+			// If the title is null (/invalid), don't show this row
+			return false;
+		}
+
 		$link = $this->linkRenderer->makeLink( $title );
 		$isKnown = $title->isKnown() === true;
 		if ( ( $isKnown ) && ( $wgSearchDigestStrikeValidPages === true ) ) {
