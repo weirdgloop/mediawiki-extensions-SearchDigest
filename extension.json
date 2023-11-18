@@ -71,6 +71,12 @@
 		"SpecialSearchNogomatch": "main"
 	},
 	"AvailableRights": [
+		"searchdigest-reader",
 		"searchdigest-admin"
-	]
+	],
+	"GroupPermissions": {
+		"*": {
+			"searchdigest-reader": true
+		}
+	}
 }

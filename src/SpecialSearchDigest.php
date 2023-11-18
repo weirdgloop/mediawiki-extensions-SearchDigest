@@ -9,7 +9,7 @@ use Title;
 
 class SpecialSearchDigest extends QueryPage {
   function __construct() {
-    parent::__construct( 'SearchDigest' );
+    parent::__construct( 'SearchDigest', 'searchdigest-reader' );
     $this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
   }
 

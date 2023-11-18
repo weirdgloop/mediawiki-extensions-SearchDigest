@@ -22,5 +22,7 @@
 	"searchdigest-admintools-rmold": "Text used on the admin tools option for deleting old entries from the database table",
 	"searchdigest-admintools-dbwipe": "Text used on the admin tools option for wiping the database table",
 	"searchdigest-admintools-submit": "Text used on the admin tools submit button",
-	"right-searchdigest-admin": "Description of the searchdigest admin right, who can use the admin tools on Special:SearchDigest"
+	"right-searchdigest-admin": "Description of the searchdigest admin right, who can use the admin tools on Special:SearchDigest",
+	"right-searchdigest-reader": "Description of the searchdigest reader right, who can access Special:SearchDigest",
+	"action-searchdigest-reader": "Text used on Special:SearchDigest when the user has no permission to view it"
 }

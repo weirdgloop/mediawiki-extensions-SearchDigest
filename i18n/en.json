@@ -23,5 +23,7 @@
 	"searchdigest-admintools-rmold": "Remove old entries from database table",
 	"searchdigest-admintools-dbwipe": "Clear database table (!!!)",
 	"searchdigest-admintools-submit": "Perform action",
-	"right-searchdigest-admin": "Access administration tasks (SearchDigest)"
+	"right-searchdigest-admin": "Access administration tasks (SearchDigest)",
+	"right-searchdigest-reader": "View the most popular searched queries",
+	"action-searchdigest-reader": "view the most popular searched queries"
 }
