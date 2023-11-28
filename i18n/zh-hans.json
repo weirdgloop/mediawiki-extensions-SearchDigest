@@ -21,5 +21,7 @@
 	"searchdigest-admintools-rmold": "从数据库表中删除旧条目",
 	"searchdigest-admintools-dbwipe": "清除数据库表（'''危险'''）",
 	"searchdigest-admintools-submit": "执行操作",
-	"right-searchdigest-admin": "访问SearchDigest的管理任务"
+	"right-searchdigest-admin": "访问SearchDigest的管理任务",
+	"right-searchdigest-reader": "查看最热门的搜索查询",
+	"action-searchdigest-reader": "查看最热门的搜索查询"
 }
