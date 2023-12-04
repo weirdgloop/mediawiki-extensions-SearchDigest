@@ -21,7 +21,7 @@
 	"searchdigest-admintools-rmold": "從資料庫表中刪除舊條目",
 	"searchdigest-admintools-dbwipe": "清除資料庫表（'''危險'''）",
 	"searchdigest-admintools-submit": "執行操作",
-	"right-searchdigest-admin": "存取SearchDigest的管理任務",
+	"right-searchdigest-admin": "存取SearchDigest的管理工作",
 	"right-searchdigest-reader": "檢視最熱門的搜尋查詢",
 	"action-searchdigest-reader": "檢視最熱門的搜尋查詢"
 }
