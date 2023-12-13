@@ -3,33 +3,35 @@
  * @author Jayden Bailey
  */
 
+const REDIRECT = require( './data.json' ).redirect;
+
 /**
  * Initialise the dialog window
  */
 function SDRedirectDialog( config ) {
-	SDRedirectDialog.super.call( this, config );
+  SDRedirectDialog.super.call( this, config );
 }
 OO.inheritClass( SDRedirectDialog, OO.ui.ProcessDialog ); 
 
 SDRedirectDialog.static.name = 'sdredir';
 SDRedirectDialog.static.title = mw.message('searchdigest-redirect-title').escaped();
 SDRedirectDialog.static.actions = [
-	{ 
-		flags: 'primary', 
-		label: mw.message('searchdigest-redirect-redirectbutton').escaped(), 
-		action: 'redirect' 
-	},
-	{ 
-		flags: 'safe', 
-		label: mw.message('cancel').escaped() 
-	 }
+  { 
+    flags: 'primary', 
+    label: mw.message('searchdigest-redirect-redirectbutton').escaped(), 
+    action: 'redirect' 
+  },
+  { 
+    flags: 'safe', 
+    label: mw.message('cancel').escaped() 
+   }
 ];
 
 SDRedirectDialog.prototype.initialize = function () {
   SDRedirectDialog.super.prototype.initialize.call( this );
-	this.content = new OO.ui.PanelLayout( { 
-		padded: true,
-		expanded: false 
+  this.content = new OO.ui.PanelLayout( { 
+    padded: true,
+    expanded: false 
   } );
   this.pageToCreate = ''
   this.comboBox = new OO.ui.ComboBoxInputWidget( {
@@ -80,48 +82,48 @@ SDRedirectDialog.prototype.onComboboxInputEnter = function () {
 };
 
 SDRedirectDialog.prototype.getSetupProcess = function ( data ) {
-	data = data || {};
-	return SDRedirectDialog.super.prototype.getSetupProcess.call( this, data )
-	.next( function () {
+  data = data || {};
+  return SDRedirectDialog.super.prototype.getSetupProcess.call( this, data )
+  .next( function () {
     this.pageToCreate = data.page;
     this.$content.find('#sd-ptc').text(data.page);
     this.actions.setAbilities( {
       redirect: false
     } );
-	}, this );
+  }, this );
 };
 
 SDRedirectDialog.prototype.getReadyProcess = function ( data ) {
   return SDRedirectDialog.super.prototype.getReadyProcess.call( this, data )
-	.next( function () {
+  .next( function () {
     this.comboBox.focus();
-	}, this );
+  }, this );
 }
 
 SDRedirectDialog.prototype.getActionProcess = function ( action ) {
   var self = this;
-	if ( action === 'redirect' ) {
-		return new OO.ui.Process( function () {
+  if ( action === 'redirect' ) {
+    return new OO.ui.Process( function () {
       api = new mw.Api();
       api.create( this.pageToCreate, {
         summary: mw.message('searchdigest-redirect-editsummary', this.comboBox.value).escaped()
-      }, "#REDIRECT [[" + this.comboBox.value + "]]").done( function(data) {
+      }, REDIRECT + " [[" + this.comboBox.value + "]]").done( function(data) {
         mw.notify( mw.message('searchdigest-redirect-successtext', self.pageToCreate).escaped(), { tag: 'sd-created' } );
         self.close( { page: self.pageToCreate } );
       }).fail( function(data) {
         OO.ui.alert( mw.message('searchdigest-redirect-problem').escaped() );
         self.close( { page: self.pageToCreate } );
       });
-		}, this );
-	}
-	// Fallback to parent handler
-	return SDRedirectDialog.super.prototype.getActionProcess.call( this, action );
+    }, this );
+  }
+  // Fallback to parent handler
+  return SDRedirectDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 SDRedirectDialog.prototype.getTeardownProcess = function ( data ) {
   var self = this;
-	return SDRedirectDialog.super.prototype.getTeardownProcess.call( this, data )
-	.next( function () {
+  return SDRedirectDialog.super.prototype.getTeardownProcess.call( this, data )
+  .next( function () {
     if (data && data.page) {
       // data.page is the page we created a redirect for
       // get the span element for the button of the page we just made
@@ -140,11 +142,11 @@ SDRedirectDialog.prototype.getTeardownProcess = function ( data ) {
       // because of weird clipping bugs
       self.comboBox.getMenu().toggle();
     };
-	}, this );
+  }, this );
 }
 
 var redirDialog = new SDRedirectDialog( {
-	size: 'medium'
+  size: 'medium'
 } );
 
 var windowManager = new OO.ui.WindowManager();
