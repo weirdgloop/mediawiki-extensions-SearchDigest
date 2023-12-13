@@ -28,12 +28,16 @@
 		"ext.searchdigest.styles": {
 			"styles": "ext.searchdigest.styles.css"
 		},
-    "ext.searchdigest.redirect": {
-        "scripts": [
-            "ext.searchdigest.redirect.js"
-				],
-				"styles": "ext.searchdigest.redirect.css",
-        "messages": [
+		"ext.searchdigest.redirect": {
+			"packageFiles": [
+				"ext.searchdigest.redirect.js",
+				{
+					"name": "data.json",
+					"callback": "MediaWiki\\Extension\\SearchDigest\\SearchDigestHooks::getModuleData"
+				}
+			],
+			"styles": "ext.searchdigest.redirect.css",
+			"messages": [
 						"searchdigest-redirect-buttontext",
 						"searchdigest-redirect-successtext",
 						"searchdigest-redirect-problem",
@@ -43,20 +47,20 @@
 						"searchdigest-redirect-redirectbutton",
 						"searchdigest-redirect-title",
 						"cancel"
-        ],
-        "dependencies": [
+			],
+			"dependencies": [
 						"oojs-ui-core",
 						"oojs-ui-windows",
 						"mediawiki.api"
-        ]
-    }
+			]
+		}
 	},
 	"JobClasses": {
 		"SearchDigestJob": "MediaWiki\\Extension\\SearchDigest\\SearchDigestJob"
 	},
 	"ResourceFileModulePaths": {
-    "localBasePath": "src/modules",
-    "remoteExtPath": "SearchDigest/src/modules"
+		"localBasePath": "src/modules",
+		"remoteExtPath": "SearchDigest/src/modules"
 	},
 	"MessagesDirs": {
 		"SearchDigest": "i18n"

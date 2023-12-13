@@ -34,4 +34,15 @@ class SearchDigestHooks implements SpecialSearchNogomatchHook {
 			] )
 		);
 	}
+
+	/**
+	 * Expose redirect magic word
+	 * @return array
+	 */
+	public static function getModuleData() {
+		$factory = MediaWikiServices::getInstance()->getMagicWordFactory();
+		return [
+			'redirect' => $factory->get( 'redirect' )->getSynonym( 0 ),
+		];
+	}
 }
