@@ -11,27 +11,27 @@ const SDdata = require( './data.json' );
 function SDRedirectDialog( config ) {
   SDRedirectDialog.super.call( this, config );
 }
-OO.inheritClass( SDRedirectDialog, OO.ui.ProcessDialog ); 
+OO.inheritClass( SDRedirectDialog, OO.ui.ProcessDialog );
 
 SDRedirectDialog.static.name = 'sdredir';
 SDRedirectDialog.static.title = mw.message('searchdigest-redirect-title').escaped();
 SDRedirectDialog.static.actions = [
-  { 
-    flags: 'primary', 
-    label: mw.message('searchdigest-redirect-redirectbutton').escaped(), 
-    action: 'redirect' 
+  {
+    flags: 'primary',
+    label: mw.message('searchdigest-redirect-redirectbutton').escaped(),
+    action: 'redirect'
   },
-  { 
-    flags: 'safe', 
-    label: mw.message('cancel').escaped() 
+  {
+    flags: 'safe',
+    label: mw.message('cancel').escaped()
    }
 ];
 
 SDRedirectDialog.prototype.initialize = function () {
   SDRedirectDialog.super.prototype.initialize.call( this );
-  this.content = new OO.ui.PanelLayout( { 
+  this.content = new OO.ui.PanelLayout( {
     padded: true,
-    expanded: false 
+    expanded: false
   } );
   this.pageToCreate = ''
   this.comboBox = new OO.ui.ComboBoxInputWidget( {
@@ -161,7 +161,7 @@ var $redirBtns = $('span.sd-cr-btn');
 
 $redirBtns.each(function (i) {
   // Create new OOUI button for each item
-  var btn = new OO.ui.ButtonWidget( { 
+  var btn = new OO.ui.ButtonWidget( {
     label: mw.message('searchdigest-redirect-buttontext').escaped(),
     classes: ['sd-cr-btn-wdgt']
   } );

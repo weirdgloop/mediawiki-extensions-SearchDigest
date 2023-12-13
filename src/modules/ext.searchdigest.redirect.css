@@ -1,7 +1,8 @@
 .sd-cr-btn-wdgt > .oo-ui-buttonElement-button {
-  font-size: .75em;
+	font-size: .75em;
+	display: inline;
 }
 
 #sd-ptc {
-  font-style: italic;
+	font-weight: bold;
 }
