@@ -3,7 +3,7 @@
  * @author Jayden Bailey
  */
 
-const REDIRECT = require( './data.json' ).redirect;
+const SDdata = require( './data.json' );
 
 /**
  * Initialise the dialog window
@@ -106,8 +106,8 @@ SDRedirectDialog.prototype.getActionProcess = function ( action ) {
     return new OO.ui.Process( function () {
       api = new mw.Api();
       api.create( this.pageToCreate, {
-        summary: mw.message('searchdigest-redirect-editsummary', this.comboBox.value).escaped()
-      }, REDIRECT + " [[" + this.comboBox.value + "]]").done( function(data) {
+        summary: mw.format(SDdata.editsummary, this.comboBox.value)
+      }, SDdata.redirect + " [[" + this.comboBox.value + "]]").done( function(data) {
         mw.notify( mw.message('searchdigest-redirect-successtext', self.pageToCreate).escaped(), { tag: 'sd-created' } );
         self.close( { page: self.pageToCreate } );
       }).fail( function(data) {

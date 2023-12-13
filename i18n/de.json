@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"MarkusRost"
+		]
+	},
+	"searchdigest": "Suchübersicht",
+	"searchdigest-desc": "Zum Anzeigen von fehlgeschlagenen Suchen",
+	"searchdigest-help": "Diese Seite zeigt die am häufigsten fehlgeschlagenen Suchen auf diesem Wiki für die letzte Woche.",
+	"searchdigest-error-invalid-misses": "Ungültiger Wert für die Verfehlungen: $1 ($2)",
+	"searchdigest-error-invalid-query": "Ungültiger Wert für den Suchbegriff: $1 ($2)",
+	"searchdigest-redirect-buttontext": "Weiterleitung erstellen",
+	"searchdigest-redirect-successtext": "Weiterleitung für „$1“ erfolgreich erstellt",
+	"searchdigest-redirect-problem": "Ein Fehler ist aufgetreten. Die Seite wurde eventuell bereits erstellt.",
+	"searchdigest-redirect-editsummary": "Weiterleitung nach [[$1]] mit [[Spezial:Suchübersicht]] erstellt",
+	"searchdigest-redirect-inputplaceholder": "Name der Zielseite...",
+	"searchdigest-redirect-helptext": "Bitte gebe die Seite ein, zu welcher <span id='sd-ptc'></span> weiterleiten soll:",
+	"searchdigest-redirect-redirectbutton": "Erstellen",
+	"searchdigest-redirect-title": "Weiterleitung erstellen",
+	"searchdigest-admintools-noperms": "Du hast nicht die benötigten Berechtigungen für diese Aktion.",
+	"searchdigest-admintools-help": "Diese speziellen Werkzeuge sind zerstörerisch und verursachen drastische Änderungen an den Datenbanktabellen für die Suchübersicht. Sei vorsichtig.",
+	"searchdigest-admintools-rmold": "Entferne alte Einträge aus der Datenbanktabelle",
+	"searchdigest-admintools-dbwipe": "Datenbanktabelle leeren (!!!)",
+	"searchdigest-admintools-submit": "Aktion durchführen",
+	"right-searchdigest-admin": "Zugriff auf administrative Aufgaben (Suchübersicht)",
+	"right-searchdigest-reader": "Sehe die beliebtesten Suchbegriffe",
+	"action-searchdigest-reader": "sehen der beliebtesten Suchbegriffe"
+}
