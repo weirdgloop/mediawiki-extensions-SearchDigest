@@ -41,7 +41,6 @@
 						"searchdigest-redirect-buttontext",
 						"searchdigest-redirect-successtext",
 						"searchdigest-redirect-problem",
-						"searchdigest-redirect-editsummary",
 						"searchdigest-redirect-inputplaceholder",
 						"searchdigest-redirect-helptext",
 						"searchdigest-redirect-redirectbutton",
@@ -64,6 +63,9 @@
 	},
 	"MessagesDirs": {
 		"SearchDigest": "i18n"
+	},
+	"ExtensionMessagesFiles": {
+		"SearchDigestAlias": "SearchDigest.i18n.alias.php"
 	},
 	"HookHandlers": {
 		"main": {

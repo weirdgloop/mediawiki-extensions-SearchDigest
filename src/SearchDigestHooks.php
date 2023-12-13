@@ -36,13 +36,14 @@ class SearchDigestHooks implements SpecialSearchNogomatchHook {
 	}
 
 	/**
-	 * Expose redirect magic word
+	 * Expose redirect magic word and edit summary in content language
 	 * @return array
 	 */
-	public static function getModuleData() {
+	public static function getModuleData( MediaWiki\ResourceLoader\Context $context ) {
 		$factory = MediaWikiServices::getInstance()->getMagicWordFactory();
 		return [
 			'redirect' => $factory->get( 'redirect' )->getSynonym( 0 ),
+			'editsummary' => $context->msg( 'searchdigest-redirect-editsummary' )->inContentLanguage()->plain(),
 		];
 	}
 }
