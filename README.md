@@ -24,6 +24,12 @@ wfLoadExtension( 'SearchDigest' );
 | `$wgSearchDigestCreateRedirect` | bool | Whether to show a button for quickly creating redirects on Special:SearchDigest (requires JS in browser) | `true`
 | `$wgSearchDigestMinimumMisses` | int | Number of misses for a query before they should show up on Special:SearchDigest | `10`
 
+## Permissions
+By default, this extension adds two rights:
+
+* `searchdigest-reader` grants access to viewing Special:SearchDigest. It is given to all users by default.
+* `searchdigest-admin` provides maintenance tools on the Special:SearchDigest tools that are intended to be used by system administrators, including the ability to clear the database.
+
 ## Translation
 This extension can be translated through the messages in the `ì18n` folder if you're a developer. As a wiki administrator, you may find it a better option to edit the messages on-site in the MediaWiki namespace.
 
