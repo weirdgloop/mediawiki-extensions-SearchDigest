@@ -7,7 +7,7 @@
 	},
 	"searchdigest": "SearchDigest",
 	"searchdigest-desc": "Used for tracking and displaying missed search queries",
-	"searchdigest-help": "This page displays the most common failed searches on this wiki for the last week.",
+	"searchdigest-help": "This page displays the most common failed searches on this wiki for the last week. The value displayed in brackets next to the search is the all-time number of missed searches.",
 	"searchdigest-error-invalid-misses": "Invalid value for misses: $1 ($2)",
 	"searchdigest-error-invalid-query": "Invalid value for query: $1 ($2)",
 	"searchdigest-redirect-buttontext": "Create redirect",
@@ -23,6 +23,9 @@
 	"searchdigest-admintools-rmold": "Remove old entries from database table",
 	"searchdigest-admintools-dbwipe": "Clear database table (!!!)",
 	"searchdigest-admintools-submit": "Perform action",
+	"searchdigest-form-prefix": "Show searches beginning with",
+	"searchdigest-form-sortalpha": "Sort results alphabetically instead of by number of searches",
+	"searchdigest-form-submit": "Go",
 	"right-searchdigest-admin": "Access administration tasks (SearchDigest)",
 	"right-searchdigest-reader": "View the most popular searched queries",
 	"action-searchdigest-reader": "view the most popular searched queries"

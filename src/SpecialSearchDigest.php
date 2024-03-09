@@ -8,6 +8,10 @@ use QueryPage;
 use Title;
 
 class SpecialSearchDigest extends QueryPage {
+	protected string $prefix = '';
+
+	protected bool $sortAlpha = false;
+
 	function __construct() {
 		parent::__construct( 'SearchDigest', 'searchdigest-reader' );
 		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
@@ -16,10 +20,18 @@ class SpecialSearchDigest extends QueryPage {
 	function execute( $par ) {
 		global $wgSearchDigestCreateRedirect;
 
-		// Add intro text before we execute parent function so that it renders before
+		// If a character prefix was provided, we will only return results that start with that character.
+		$prefix = strtolower( $this->getRequest()->getRawVal( 'prefix' ) ?? '' );
+		if ( ctype_alpha( $prefix ) ) {
+			$this->prefix = $prefix;
+		}
+
+		$this->sortAlpha = $this->getRequest()->getBool( 'sortalpha' );
+
+		// Add intro text before we execute parent function so that it renders before.
 		$out = $this->getOutput();
 		$out->addModuleStyles( [ 'ext.searchdigest.styles' ] );
-		$out->addWikiTextAsInterface( wfMessage( 'searchdigest-help' )->text() );
+		$this->displayViewForm();
 
 		parent::execute( $par );
 		$this->setLinkBatchFactory( MediaWikiServices::getInstance()->getLinkBatchFactory() );
@@ -31,7 +43,7 @@ class SpecialSearchDigest extends QueryPage {
 			$out->addModuleStyles( [ 'oojs-ui.styles.icons-moderation' ] );
 
 			$out->addHtml('<div class="sd-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->plain() . '</p>');
-			$this->createAdminForm();
+			$this->displayAdminForm();
 			$out->addHtml('</div>');
 		}
 
@@ -41,7 +53,35 @@ class SpecialSearchDigest extends QueryPage {
 		}
 	}
 
-	function createAdminForm () {
+	protected function displayViewForm() {
+		$fields = [
+			'prefix' => [
+				'type' => 'text',
+				'name' => 'prefix',
+				'label-message' => 'searchdigest-form-prefix',
+				'required' => false,
+			],
+			'sortalpha' => [
+				'type' => 'check',
+				'name' => 'sortalpha',
+				'default' => $this->sortAlpha,
+				'label-message' => 'searchdigest-form-sortalpha',
+				'required' => false,
+			]
+		];
+
+		$form = HTMLForm::factory( 'ooui', $fields, $this->getContext() )
+			->setMethod( 'get' )
+			->setTitle( $this->getPageTitle() ) // Remove subpage
+			->setSubmitCallback( [ $this, 'onSubmit' ] )
+			->setWrapperLegendMsg( 'searchdigest' )
+			->addHeaderHtml( $this->msg( 'searchdigest-help' )->parseAsBlock() )
+			->setSubmitTextMsg( 'searchdigest-form-submit' )
+			->prepareForm();
+		$form->displayForm( false );
+	}
+
+	protected function displayAdminForm() {
 		$desc = [
 			'select' => [
 				'type' => 'select',
@@ -77,27 +117,42 @@ class SpecialSearchDigest extends QueryPage {
 		}
 	}
 
-	function isSyndicated() {
+	public function isSyndicated() {
 		return false;
 	}
 
-	function getQueryInfo() {
+	public function getQueryInfo() {
 		global $wgSearchDigestMinimumMisses;
+		$db = $this->getRecacheDB();
 
 		// Get the date one week ago
 		$dateLimit = date( 'Y-m-d', ( wfTimestamp( TS_UNIX ) - 604800 ) );
+
+		$conds = [
+			'sd_touched > ' . $db->addQuotes( $dateLimit ),
+			'sd_misses >= ' . $wgSearchDigestMinimumMisses
+		];
+
+		if ( $this->prefix != '' ) {
+			$conds[] = 'sd_query ' . $db->buildLike( $this->prefix, $db->anyString() );
+		}
+
 		return [
 			'tables' => [ 'searchdigest' ],
 			'fields' => [ 'sd_query', 'sd_misses' ],
-			'conds' => [ 'sd_touched > ' . $this->getRecacheDB()->addQuotes( $dateLimit ) . ' AND sd_misses >= ' . $wgSearchDigestMinimumMisses ],
+			'conds' => $conds,
 		];
 	}
 
-	function getOrderFields() {
+	protected function getOrderFields() {
+		if ( $this->sortAlpha ) {
+			return [ 'sd_query' ];
+		}
+
 		return [ 'sd_misses' ];
 	}
 
-	function formatResult( $skin, $result ) {
+	protected function formatResult( $skin, $result ) {
 		global $wgSearchDigestStrikeValidPages;
 
 		$title = Title::newFromText( $result->sd_query );
@@ -116,8 +171,29 @@ class SpecialSearchDigest extends QueryPage {
 		return $link . ' (' . $result->sd_misses . ') ' . ( $isKnown ? '' : '<span class="sd-cr-btn" data-page="' . htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '"></span>' );
 	}
 
-	function getGroupName() {
+	protected function getGroupName() {
 		return 'pages';
+	}
+
+	protected function linkParameters() {
+		$params = [];
+
+		if ( $this->prefix != '' ) {
+			$params['prefix'] = $this->prefix;
+		}
+		if ( $this->sortAlpha ) {
+			$params['sortalpha'] = $this->sortAlpha;
+		}
+
+		return $params;
+	}
+
+	protected function sortDescending() {
+		if ( $this->sortAlpha ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	protected function preprocessResults( $db, $res ) {
