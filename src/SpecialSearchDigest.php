@@ -21,11 +21,7 @@ class SpecialSearchDigest extends QueryPage {
 		global $wgSearchDigestCreateRedirect;
 
 		// If a character prefix was provided, we will only return results that start with that character.
-		$prefix = strtolower( $this->getRequest()->getRawVal( 'prefix' ) ?? '' );
-		if ( ctype_alpha( $prefix ) ) {
-			$this->prefix = $prefix;
-		}
-
+		$this->prefix = Title::makeTitleSafe( NS_MAIN, $this->getRequest()->getRawVal( 'prefix' ) ) ?? '';
 		$this->sortAlpha = $this->getRequest()->getBool( 'sortalpha' );
 
 		// Add intro text before we execute parent function so that it renders before.
