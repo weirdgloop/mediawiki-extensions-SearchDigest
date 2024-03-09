@@ -19,7 +19,10 @@ class SearchDigestHooks implements SpecialSearchNogomatchHook {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
 	 */
 	public function onLoadExtensionSchemaUpdates ( DatabaseUpdater $updater ) {
-		$updater->addExtensionTable( 'searchdigest', __DIR__ . '/../sql/searchdigest.sql' );
+		$updater->addExtensionTable( 'searchdigest', dirname( __DIR__ ) . '/sql/searchdigest.sql' );
+		$updater->addExtensionIndex( 'searchdigest', 'sd_misses_touched',
+			dirname( __DIR__ ) . '/sql/patch_searchdigest_sd_misses_touched.sql'
+		);
 	}
 
 	/**
