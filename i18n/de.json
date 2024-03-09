@@ -6,7 +6,7 @@
 	},
 	"searchdigest": "Suchübersicht",
 	"searchdigest-desc": "Zum Anzeigen von fehlgeschlagenen Suchen",
-	"searchdigest-help": "Diese Seite zeigt die am häufigsten fehlgeschlagenen Suchen auf diesem Wiki für die letzte Woche.",
+	"searchdigest-help": "Diese Seite zeigt die am häufigsten fehlgeschlagenen Suchen auf diesem Wiki.",
 	"searchdigest-error-invalid-misses": "Ungültiger Wert für die Verfehlungen: $1 ($2)",
 	"searchdigest-error-invalid-query": "Ungültiger Wert für den Suchbegriff: $1 ($2)",
 	"searchdigest-redirect-buttontext": "Weiterleitung erstellen",

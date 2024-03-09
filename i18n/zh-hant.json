@@ -5,7 +5,7 @@
 		]
 	},
 	"searchdigest-desc": "追蹤並列出失敗的搜尋查詢",
-	"searchdigest-help": "此頁面列出了上一週此wiki上最常見的失敗搜尋。",
+	"searchdigest-help": "此頁面列出了上一此wiki上最常見的失敗搜尋。",
 	"searchdigest-error-invalid-misses": "無效的失敗搜尋值：$1（$2）",
 	"searchdigest-error-invalid-query": "無效的查詢值：$1（$2）",
 	"searchdigest-redirect-buttontext": "建立重新導向",
@@ -19,7 +19,7 @@
 	"searchdigest-admintools-noperms": "您無權執行此操作。",
 	"searchdigest-admintools-help": "小心！下列特殊工具有破壞性，且會對SearchDigest資料表進行重大變更。",
 	"searchdigest-admintools-rmold": "從資料表中刪除舊條目",
-	"searchdigest-admintools-dbwipe": "清除資料表（危險！！！）",
+	"searchdigest-admintools-dbwipe": "清除資料表（'''危險'''）",
 	"searchdigest-admintools-submit": "執行操作",
 	"right-searchdigest-admin": "存取SearchDigest的管理工作",
 	"right-searchdigest-reader": "檢視最熱門的搜尋查詢",
