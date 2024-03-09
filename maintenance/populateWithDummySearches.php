@@ -6,50 +6,62 @@ if ( $IP === false ) {
 }
 require_once "$IP/maintenance/Maintenance.php";
 
-class PopulateDummySearchDigest extends Maintenance {
+class PopulateDummySearches extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->addDescription( 'Populate SearchDigest table with dummy data' );
+		$this->addDescription( 'Populate SearchDigest table with dummy data for testing/debugging purposes' );
+		$this->addOption( 'purge', 'Whether to remove existing entries in the table' );
+		$this->addArg( 'entries', 'Number of entries to insert' );
 
 		$this->requireExtension( 'SearchDigest' );
 	}
-  
-  public function generateRandomString($length = 30) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-  }
+
+	public function generateRandomString($length = 30) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
 
 	public function execute() {
-		$db = $this->getDB( DB_PRIMARY );
+		$purge = (bool)$this->getOption( 'purge', false );
+		$numEntries = (int)$this->getArg( 0, 1000 );
+		$dbw = $this->getDB( DB_PRIMARY );
+		$this->beginTransaction( $dbw, __METHOD__ );
 
-    for ($x = 0; $x <= 1000; $x++) {
-      $vals = [
-        'sd_misses' => rand( 1, 2000 ),
-        'sd_touched' => date("Y-m-d H:i:s")
-      ];
-  
-      $dbw = wfGetDB( DB_PRIMARY );
-      $dbw->upsert(
-        'searchdigest',
-        [
-          'sd_query' => $this->generateRandomString()
-        ] + $vals,
-        [
-          'sd_query'
-        ],
-        $vals,
-        __METHOD__
-      );
-    }
+		$this->output( "Working...\n" );
+		$rows = [];
 
-    return true;
+		if ( $purge ) {
+			$this->output( "Purging searchdigest table...\n" );
+			$dbw->delete( 'searchdigest', IDatabase::ALL_ROWS );
+		}
+
+		for ($x = 0; $x < $numEntries; $x++) {
+			$rows[] = [
+				'sd_query' => $this->generateRandomString(),
+				'sd_misses' => rand(1, 2000),
+				'sd_touched' => date("Y-m-d H:i:s")
+			];
+		}
+
+		$this->output( "Inserting entries...\n" );
+
+		$dbw->insert(
+			'searchdigest',
+			$rows,
+			__METHOD__,
+			[ 'IGNORE' ]
+		);
+		$this->commitTransaction( $dbw, __METHOD__ );
+		$this->output( "Done!\n" );
+
+		return true;
 	}
 }
 
-$maintClass = 'PopulateDummySearchDigest';
+$maintClass = 'PopulateDummySearches';
 require_once RUN_MAINTENANCE_IF_MAIN;
