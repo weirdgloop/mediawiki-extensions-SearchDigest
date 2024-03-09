@@ -153,22 +153,16 @@ class SpecialSearchDigest extends QueryPage {
 	}
 
 	protected function formatResult( $skin, $result ) {
-		global $wgSearchDigestStrikeValidPages;
-
 		$title = Title::newFromText( $result->sd_query );
 
-		if ( $title === null ) {
-			// If the title is null or invalid, don't show this row.
+		if ( $title === null || $title->isKnown() ) {
+			// If the title is null or is a valid page, don't show this row.
 			return false;
 		}
 
 		$link = $this->linkRenderer->makeLink( $title );
-		$isKnown = $title->isKnown() === true;
-		if ( ( $isKnown ) && ( $wgSearchDigestStrikeValidPages === true ) ) {
-			$link = '<s>' . $link . '</s>';
-		}
 
-		return $link . ' (' . $result->sd_misses . ') ' . ( $isKnown ? '' : '<span class="sd-cr-btn" data-page="' . htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '"></span>' );
+		return $link . ' (' . $result->sd_misses . ') <span class="sd-cr-btn" data-page="' . htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '"></span>';
 	}
 
 	protected function getGroupName() {

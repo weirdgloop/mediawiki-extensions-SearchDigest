@@ -10,7 +10,6 @@
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
-		"SearchDigestStrikeValidPages": true,
 		"SearchDigestCreateRedirect": true,
 		"SearchDigestMinimumMisses": 10,
 		"SearchDigestDateThreshold": 604800
