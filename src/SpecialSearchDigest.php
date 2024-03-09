@@ -122,11 +122,11 @@ class SpecialSearchDigest extends QueryPage {
 	}
 
 	public function getQueryInfo() {
-		global $wgSearchDigestMinimumMisses;
+		global $wgSearchDigestMinimumMisses, $wgSearchDigestDateThreshold;
 		$db = $this->getRecacheDB();
 
-		// Get the date one week ago
-		$dateLimit = date( 'Y-m-d', ( wfTimestamp( TS_UNIX ) - 604800 ) );
+		// Get the threshold
+		$dateLimit = date( 'Y-m-d', ( wfTimestamp( TS_UNIX ) - $wgSearchDigestDateThreshold ) );
 
 		$conds = [
 			'sd_touched > ' . $db->addQuotes( $dateLimit ),

@@ -23,6 +23,7 @@ wfLoadExtension( 'SearchDigest' );
 | `$wgSearchDigestStrikeValidPages` | bool | Whether to strike out valid pages (pages that exist) on the special page | `true`
 | `$wgSearchDigestCreateRedirect` | bool | Whether to show a button for quickly creating redirects on Special:SearchDigest (requires JS in browser) | `true`
 | `$wgSearchDigestMinimumMisses` | int | Number of misses for a query before they should show up on Special:SearchDigest | `10`
+| `$wgSearchDigestDateThreshold` | int | Seconds subtracted from the current [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). Any queries that haven't been searched before this threshold aren't displayed. | `604800` (1 week)
 
 ## Permissions
 By default, this extension adds two rights:
