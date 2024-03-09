@@ -8,12 +8,12 @@ use QueryPage;
 use Title;
 
 class SpecialSearchDigest extends QueryPage {
-  function __construct() {
-    parent::__construct( 'SearchDigest', 'searchdigest-reader' );
-    $this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
-  }
+	function __construct() {
+		parent::__construct( 'SearchDigest', 'searchdigest-reader' );
+		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+	}
 
-  function execute( $par ) {
+	function execute( $par ) {
 		global $wgSearchDigestCreateRedirect;
 
 		// Add intro text before we execute parent function so that it renders before
@@ -22,6 +22,7 @@ class SpecialSearchDigest extends QueryPage {
 		$out->addWikiTextAsInterface( wfMessage( 'searchdigest-help' )->text() );
 
 		parent::execute( $par );
+		$this->setLinkBatchFactory( MediaWikiServices::getInstance()->getLinkBatchFactory() );
 
 		$out->enableOOUI();
 
@@ -32,17 +33,6 @@ class SpecialSearchDigest extends QueryPage {
 			$out->addHtml('<div class="sd-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->plain() . '</p>');
 			$this->createAdminForm();
 			$out->addHtml('</div>');
-
-			// $btnGrp = new OOUI\ButtonGroupWidget( [
-			// 	'items' => [
-			// 		new OOUI\ButtonWidget( [
-			// 			'infusable' => true,
-			// 			'icon' => 'trash',
-			// 			'label' => wfMessage( 'searchdigest-admintools-clear' )->plain()
-			// 		] )
-			// 	]
-			// ] );
-			// $out->addHtml('<div class="sd-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->plain() . '</p>' . $btnGrp . '</div>');
 		}
 
 		// Additional client JS for redirect button
@@ -54,11 +44,11 @@ class SpecialSearchDigest extends QueryPage {
 	function createAdminForm () {
 		$desc = [
 			'select' => [
-        'type' => 'select',
-        'options' => [
-						wfMessage( 'searchdigest-admintools-rmold' )->plain() => 'rmold',
-            wfMessage( 'searchdigest-admintools-dbwipe' )->plain() => 'dbwipe'
-        ]
+				'type' => 'select',
+				'options' => [
+					wfMessage( 'searchdigest-admintools-rmold' )->plain() => 'rmold',
+					wfMessage( 'searchdigest-admintools-dbwipe' )->plain() => 'dbwipe'
+				]
 			]
 		];
 		$form = HTMLForm::factory( 'ooui', $desc, $this->getContext(), 'searchdigest' );
@@ -87,11 +77,11 @@ class SpecialSearchDigest extends QueryPage {
 		}
 	}
 
-  function isSyndicated() {
-    return false;
-  }
+	function isSyndicated() {
+		return false;
+	}
 
-  function getQueryInfo() {
+	function getQueryInfo() {
 		global $wgSearchDigestMinimumMisses;
 
 		// Get the date one week ago
@@ -100,50 +90,20 @@ class SpecialSearchDigest extends QueryPage {
 			'tables' => [ 'searchdigest' ],
 			'fields' => [ 'sd_query', 'sd_misses' ],
 			'conds' => [ 'sd_touched > ' . $this->getRecacheDB()->addQuotes( $dateLimit ) . ' AND sd_misses >= ' . $wgSearchDigestMinimumMisses ],
-    ];
-  }
+		];
+	}
 
+	function getOrderFields() {
+		return [ 'sd_misses' ];
+	}
 
-	public function reallyDoQuery( $limit, $offset = false ) {
-		$fname = static::class . '::reallyDoQuery';
-		$dbr = $this->getRecacheDB();
-		$query = $this->getQueryInfo();
-		$order = $this->getOrderFields();
-		if ( $this->sortDescending() ) {
-			foreach ( $order as &$field ) {
-				$field .= ' DESC';
-			}
-		}
-		$tables = isset( $query['tables'] ) ? (array)$query['tables'] : [];
-		$fields = isset( $query['fields'] ) ? (array)$query['fields'] : [];
-    $conds = isset( $query['conds'] ) ? (array)$query['conds'] : [];
-		$options = isset( $query['options'] ) ? (array)$query['options'] : [];
-		$join_conds = isset( $query['join_conds'] ) ? (array)$query['join_conds'] : [];
-		if ( $limit !== false ) {
-			$options['LIMIT'] = intval( $limit );
-		}
-		if ( $offset !== false ) {
-			$options['OFFSET'] = intval( $offset );
-		}
-    $options['INNER ORDER BY'] = $order;
-    $options['ORDER BY'] = [ 'sd_misses DESC' ];
-    $res = $dbr->select( $tables, $fields, $conds, $fname,
-      $options, $join_conds
-    );
-		return $res;
-  }
-
-  function getOrderFields() {
-    return [ 'sd_misses' ];
-  }
-
-  function formatResult( $skin, $row ) {
+	function formatResult( $skin, $result ) {
 		global $wgSearchDigestStrikeValidPages;
 
-		$title = Title::newFromText( $row->sd_query );
+		$title = Title::newFromText( $result->sd_query );
 
 		if ( $title === null ) {
-			// If the title is null (/invalid), don't show this row
+			// If the title is null or invalid, don't show this row.
 			return false;
 		}
 
@@ -153,10 +113,29 @@ class SpecialSearchDigest extends QueryPage {
 			$link = '<s>' . $link . '</s>';
 		}
 
-    return $link . ' (' . $row->sd_misses . ') ' . ( $isKnown ? '' : '<span class="sd-cr-btn" data-page="' . htmlspecialchars($row->sd_query, ENT_QUOTES) . '"></span>' );
-  }
+		return $link . ' (' . $result->sd_misses . ') ' . ( $isKnown ? '' : '<span class="sd-cr-btn" data-page="' . htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '"></span>' );
+	}
 
-  function getGroupName() {
-    return 'pages';
-  }
+	function getGroupName() {
+		return 'pages';
+	}
+
+	protected function preprocessResults( $db, $res ) {
+		/**
+		 * This pre-processing is similar to QueryPage::executeLBFromResultWrapper(), but slightly different as the
+		 * row is called "sd_query" instead of "title". We're also assuming that the namespace is going to be NS_MAIN,
+		 * but this may not always be true.
+		 */
+		if ( !$res->numRows() ) {
+			return;
+		}
+
+		$batch = $this->getLinkBatchFactory()->newLinkBatch();
+		foreach ( $res as $row ) {
+			$batch->add( NS_MAIN, $row->sd_query );
+		}
+		$batch->execute();
+
+		$res->seek( 0 );
+	}
 }
