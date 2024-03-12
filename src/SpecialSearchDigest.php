@@ -347,7 +347,7 @@ EOD
 
 		$blockRecord = new SearchDigestBlocksRecord();
 		$blockRecord->setQuery( $query );
-		$blockRecord->setActor( $this->getUser() );
+		$blockRecord->setActor( $this->getUser()->getActorId() );
 		$blockRecord->save();
 
 		$out = $this->getOutput();
@@ -449,7 +449,7 @@ EOD
 		if ( $this->par === 'block' ) {
 			$blocksRecord = SearchDigestBlocksRecord::fromRow( $result );
 			$user = MediaWikiServices::getInstance()->getUserFactory()->newFromUserIdentity( $blocksRecord->getActor() );
-			$userLink = $this->linkRenderer->makeLink( $user->getUserPage() );
+			$userLink = $this->linkRenderer->makeLink( $user->getUserPage(), $user->getName() );
 
 			$unblockText = $this->linkRenderer->makePreloadedLink(
 				Title::newFromText( 'SearchDigest/unblock', NS_SPECIAL ),
