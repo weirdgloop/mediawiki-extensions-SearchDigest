@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\SearchDigest;
 
 use IDatabase;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\ActorNormalization;
 use MediaWiki\User\ActorStore;
 use MediaWiki\User\UserIdentity;
 
@@ -59,6 +60,10 @@ class SearchDigestBlocksRecord {
 		} else {
 			$actor = $this->actorStore->getActorById( $val, $this->dbw );
 			$this->actor = $actor;
+		}
+
+		if ( is_null( $this->actor ) ) {
+			$this->actor = $this->actorStore->getUnknownActor();
 		}
 	}
 
@@ -119,7 +124,7 @@ class SearchDigestBlocksRecord {
 	public function save () {
 		$vals = [
 			'sd_blocks_added' => $this->getAdded(),
-			'sd_blocks_actor' => $this->getActor()->getId()
+			'sd_blocks_actor' => MediaWikiServices::getInstance()->getActorNormalization()->findActorId( $this->actor, $this->dbw )
 		];
 
 		$this->dbw->upsert(
