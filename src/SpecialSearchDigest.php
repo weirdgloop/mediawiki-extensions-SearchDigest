@@ -26,6 +26,8 @@ class SpecialSearchDigest extends QueryPage {
 
 	protected string $startTimestamp;
 
+	protected $blockedQueries = [];
+
 	function __construct() {
 		parent::__construct( 'SearchDigest', 'searchdigest-reader' );
 		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
@@ -469,8 +471,7 @@ EOD
 				return false;
 			}
 
-			if ( SearchDigestBlocksRecord::newFromQuery( $result->sd_query ) ) {
-				// Query has been blocked, don't show this row.
+			if ( in_array( $result->sd_query, $this->blockedQueries ) ) {
 				return false;
 			}
 
@@ -479,12 +480,12 @@ EOD
 
 			if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-block' ) ) {
 				$blockText = ' &#183; ' . $this->linkRenderer->makePreloadedLink(
-					Title::newFromText( 'SearchDigest/block', NS_SPECIAL ),
-					$this->msg( 'searchdigest-block-buttontext' )->escaped(),
-					'',
-					[],
-					[ 'query' => $result->sd_query ]
-				);
+						Title::newFromText( 'SearchDigest/block', NS_SPECIAL ),
+						$this->msg( 'searchdigest-block-buttontext' )->escaped(),
+						'',
+						[],
+						[ 'query' => $result->sd_query ]
+					);
 			}
 
 			return $link . ' (' . $result->sd_misses . ') (<a role="button" class="sd-cr-btn" data-page="' .
@@ -525,6 +526,8 @@ EOD
 
 	protected function preprocessResults( $db, $res ) {
 		if ( !$this->par ) {
+			$queries = [];
+
 			/**
 			 * This pre-processing is similar to QueryPage::executeLBFromResultWrapper(), but slightly different as the
 			 * row is called "sd_query" instead of "title". We're also assuming that the namespace is going to be NS_MAIN,
@@ -535,12 +538,21 @@ EOD
 			}
 
 			$batch = $this->getLinkBatchFactory()->newLinkBatch();
+
 			foreach ( $res as $row ) {
 				$batch->add( NS_MAIN, $row->sd_query );
+				$queries[] = $row->sd_query;
 			}
 			$batch->execute();
 
 			$res->seek( 0 );
+
+			/**
+			 * Our list of queries should now be checked to see if any of them are blocked by a user with the
+			 * searchdigest-block right. We're pre-processing this as a batch here, rather than individually,
+			 * for speed and performance (to avoid 500 database calls for each 500 result page).
+			 */
+			$this->blockedQueries = SearchDigestBlocksRecord::checkQueries( $queries );
 		}
 	}
 }

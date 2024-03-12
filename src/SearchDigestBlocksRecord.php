@@ -154,4 +154,13 @@ class SearchDigestBlocksRecord {
 		$r->setActor( $row->sd_blocks_actor );
 		return $r;
 	}
+
+	public static function checkQueries ( $queries ) {
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+		return $dbr->newSelectQueryBuilder()
+			->table( self::TABLE_NAME )
+			->select( 'sd_blocks_query' )
+			->where( 'sd_blocks_query IN (' . $dbr->makeList( $queries ) . ')' )
+			->fetchFieldValues();
+	}
 }
