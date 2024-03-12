@@ -3,7 +3,7 @@
 namespace MediaWiki\Extension\SearchDigest;
 
 use HTMLForm;
-use MediaWiki\Html\Html;
+use Html;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
