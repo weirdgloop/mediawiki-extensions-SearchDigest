@@ -5,7 +5,7 @@
 		"..."
 	],
 	"url": "https://github.com/weirdgloop/mediawiki-extensions-SearchDigest",
-	"version": "1.4",
+	"version": "1.5",
 	"descriptionmsg": "searchdigest-desc",
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,

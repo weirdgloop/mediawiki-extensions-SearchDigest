@@ -35,9 +35,13 @@ class SpecialSearchDigest extends QueryPage {
 	protected function addSubtitle() {
 		$main = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ), $this->msg( 'searchdigest-nav-main' )->text() );
 		$stats = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/stats', NS_SPECIAL ), $this->msg( 'searchdigest-nav-stats' )->text() );
-		$block = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/block', NS_SPECIAL ), $this->msg( 'searchdigest-nav-block' )->text() );
 
-		$this->getOutput()->addSubtitle( implode( ' | ', [ $main, $stats, $block ] ) );
+		$links = [ $main, $stats ];
+		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-block' ) ) {
+			$links[] = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/block', NS_SPECIAL ), $this->msg( 'searchdigest-nav-block' )->text() );
+		}
+
+		$this->getOutput()->addSubtitle( implode( ' | ', $links ) );
 	}
 
 	function execute( $par ) {
