@@ -27,8 +27,9 @@ wfLoadExtension( 'SearchDigest' );
 ## Permissions
 By default, this extension adds two rights:
 
-* `searchdigest-reader` grants access to viewing Special:SearchDigest. It is given to all users by default.
-* `searchdigest-reader-stats` grants access to viewing Special:SearchDigestStats. It is given to all users by default.
+* `searchdigest-reader` grants access to view Special:SearchDigest. It is given to all users by default.
+* `searchdigest-reader-stats` grants access to view Special:SearchDigest/stats. It is given to all users by default.
+* `searchdigest-block` allows trusted users to block specific queries from appearing on Special:SearchDigest, such as inappropriate language.
 * `searchdigest-admin` provides maintenance tools on the Special:SearchDigest tools that are intended to be used by system administrators, including the ability to clear the database.
 
 ## Translation

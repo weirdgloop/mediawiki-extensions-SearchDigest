@@ -85,6 +85,9 @@
 		"*": {
 			"searchdigest-reader": true,
 			"searchdigest-reader-stats": true
+		},
+		"sysop": {
+			"searchdigest-block": true
 		}
 	}
 }
