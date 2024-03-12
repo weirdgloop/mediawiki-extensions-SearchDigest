@@ -168,7 +168,8 @@ class SpecialSearchDigest extends QueryPage {
 
 		$link = $this->linkRenderer->makeLink( $title );
 
-		return $link . ' (' . $result->sd_misses . ') <span class="sd-cr-btn" data-page="' . htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '"></span>';
+		return $link . ' (' . $result->sd_misses . ') (<a role="button" class="sd-cr-btn" data-page="' .
+			htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '">' . $this->msg( 'searchdigest-redirect-buttontext' )->escaped() . '</a>)';
 	}
 
 	protected function getGroupName() {

@@ -132,8 +132,6 @@ SDRedirectDialog.prototype.getTeardownProcess = function ( data ) {
       let pageLink = btnSpan.siblings('a');
       // remove the link (while keeping the text) and then strike through
       pageLink.contents().unwrap().wrap('<s></s>');
-      // finally, remove the button span
-      btnSpan.remove();
     };
 
     self.comboBox.setValue('');
@@ -157,18 +155,10 @@ windowManager.addWindows( [ redirDialog ] );
  * Add buttons
  */
 
-var $redirBtns = $('span.sd-cr-btn');
+var $redirBtns = $('a.sd-cr-btn');
 
 $redirBtns.each(function (i) {
-  // Create new OOUI button for each item
-  var btn = new OO.ui.ButtonWidget( {
-    label: mw.message('searchdigest-redirect-buttontext').escaped(),
-    classes: ['sd-cr-btn-wdgt'],
-  } );
-
-  btn.on('click', function () {
-    windowManager.openWindow( redirDialog, { page: btn.$element.parent().attr('data-page') } )
+  $(this).on('click', function () {
+    windowManager.openWindow( redirDialog, { page: $(this).attr('data-page') } )
   })
-
-  $(this).append(btn.$element);
 });
