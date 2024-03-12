@@ -1,5 +1,5 @@
 # SearchDigest
-MediaWiki extension which tracks failed searches on your wiki and displays them on a dedicated special page. This was originally a feature on Wikia wikis.
+MediaWiki extension which tracks failed searches on your wiki and displays them on a dedicated special page, `Special:SearchDigest`. This was originally a feature on Wikia wikis.
 
 **Live demo**: https://runescape.wiki
 
@@ -28,6 +28,7 @@ wfLoadExtension( 'SearchDigest' );
 By default, this extension adds two rights:
 
 * `searchdigest-reader` grants access to viewing Special:SearchDigest. It is given to all users by default.
+* `searchdigest-reader-stats` grants access to viewing Special:SearchDigestStats. It is given to all users by default.
 * `searchdigest-admin` provides maintenance tools on the Special:SearchDigest tools that are intended to be used by system administrators, including the ability to clear the database.
 
 ## Translation

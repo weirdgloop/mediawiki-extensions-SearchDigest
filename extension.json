@@ -10,6 +10,7 @@
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
 	"config": {
+		"SearchDigestStrikeValidPages": true,
 		"SearchDigestCreateRedirect": true,
 		"SearchDigestMinimumMisses": 10,
 		"SearchDigestDateThreshold": 604800
@@ -22,11 +23,15 @@
 		"MediaWiki\\Extension\\SearchDigest\\": "src/"
 	},
 	"SpecialPages": {
-		"SearchDigest": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigest"
+		"SearchDigest": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigest",
+		"SearchDigestStats": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigestStats"
 	},
 	"ResourceModules": {
 		"ext.searchdigest.styles": {
 			"styles": "ext.searchdigest.styles.css"
+		},
+		"ext.searchdigest.stats.styles": {
+			"styles": "ext.searchdigest.stats.styles.css"
 		},
 		"ext.searchdigest.redirect": {
 			"packageFiles": [
@@ -38,19 +43,19 @@
 			],
 			"styles": "ext.searchdigest.redirect.css",
 			"messages": [
-				"searchdigest-redirect-buttontext",
-				"searchdigest-redirect-successtext",
-				"searchdigest-redirect-problem",
-				"searchdigest-redirect-inputplaceholder",
-				"searchdigest-redirect-helptext",
-				"searchdigest-redirect-redirectbutton",
-				"searchdigest-redirect-title",
-				"cancel"
+						"searchdigest-redirect-buttontext",
+						"searchdigest-redirect-successtext",
+						"searchdigest-redirect-problem",
+						"searchdigest-redirect-inputplaceholder",
+						"searchdigest-redirect-helptext",
+						"searchdigest-redirect-redirectbutton",
+						"searchdigest-redirect-title",
+						"cancel"
 			],
 			"dependencies": [
-				"oojs-ui-core",
-				"oojs-ui-windows",
-				"mediawiki.api"
+						"oojs-ui-core",
+						"oojs-ui-windows",
+						"mediawiki.api"
 			]
 		}
 	},
@@ -82,7 +87,8 @@
 	],
 	"GroupPermissions": {
 		"*": {
-			"searchdigest-reader": true
+			"searchdigest-reader": true,
+			"searchdigest-reader-stats": true
 		}
 	}
 }

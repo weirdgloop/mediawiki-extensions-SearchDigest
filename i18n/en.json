@@ -6,8 +6,11 @@
 		]
 	},
 	"searchdigest": "SearchDigest",
+	"searchdigeststats": "SearchDigest stats",
+	"searchdigest-stats-intro": "This page displays the percentage of failed searches that have had a page created since being searched, by initial. Queries searched since '''$1''' are counted in these stats.",
+	"searchdigest-error-fromtoohigh": "The passed 'from' timestamp cannot be in the future.",
 	"searchdigest-desc": "Used for tracking and displaying missed search queries",
-	"searchdigest-help": "This page displays the most common failed searches on this wiki recently. The value displayed in brackets next to the search is the all-time number of missed searches.",
+	"searchdigest-help": "This page displays the most common failed searches on this wiki since '''$1'''. The value displayed in brackets next to the search is the all-time number of missed searches.",
 	"searchdigest-error-invalid-misses": "Invalid value for misses: $1 ($2)",
 	"searchdigest-error-invalid-query": "Invalid value for query: $1 ($2)",
 	"searchdigest-redirect-buttontext": "Create redirect",
@@ -28,5 +31,6 @@
 	"searchdigest-form-submit": "Go",
 	"right-searchdigest-admin": "Access administration tasks (SearchDigest)",
 	"right-searchdigest-reader": "View the most popular searched queries",
+	"right-searchdigest-reader-stats": "View the stats for recently searched queries",
 	"action-searchdigest-reader": "view the most popular searched queries"
 }

@@ -163,7 +163,7 @@ $redirBtns.each(function (i) {
   // Create new OOUI button for each item
   var btn = new OO.ui.ButtonWidget( {
     label: mw.message('searchdigest-redirect-buttontext').escaped(),
-    classes: ['sd-cr-btn-wdgt']
+    classes: ['sd-cr-btn-wdgt'],
   } );
 
   btn.on('click', function () {

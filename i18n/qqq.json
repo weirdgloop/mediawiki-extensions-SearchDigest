@@ -5,6 +5,9 @@
 		]
 	},
 	"searchdigest": "The name used on the Special:SpecialPages for the SearchDigest page",
+	"searchdigeststats": "The name used on the Special:SpecialPages for the SearchDigestStats page",
+	"searchdigest-stats-intro": "Text displayed at the top of the Special:SearchDigestStats page",
+	"searchdigest-error-fromtoohigh": "Error text displayed when the 'from' timestamp parameter given by a user is after the current date",
 	"searchdigest-desc": "The description used for the SearchDigest extension",
 	"searchdigest-help": "Text displayed at the top of the Special:SearchDigest page",
 	"searchdigest-error-invalid-misses": "Used when displaying an error about an invalid value for misses",
@@ -22,7 +25,11 @@
 	"searchdigest-admintools-rmold": "Text used on the admin tools option for deleting old entries from the database table",
 	"searchdigest-admintools-dbwipe": "Text used on the admin tools option for wiping the database table",
 	"searchdigest-admintools-submit": "Text used on the admin tools submit button",
+	"searchdigest-form-prefix": "Text used for the 'prefix' parameter on Special:SearchDigest",
+	"searchdigest-form-sortalpha": "Text used for the 'sort alphabetically' parameter on Special:SearchDigest",
+	"searchdigest-form-submit": "Text used for the submit button on Special:SearchDigest",
 	"right-searchdigest-admin": "Description of the searchdigest admin right, who can use the admin tools on Special:SearchDigest",
 	"right-searchdigest-reader": "Description of the searchdigest reader right, who can access Special:SearchDigest",
+	"right-searchdigest-reader-stats": "Description of the searchdigeststats reader right, who can access Special:SearchDigestStats",
 	"action-searchdigest-reader": "Text used on Special:SearchDigest when the user has no permission to view it"
 }

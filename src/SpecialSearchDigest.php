@@ -12,13 +12,15 @@ class SpecialSearchDigest extends QueryPage {
 
 	protected bool $sortAlpha = false;
 
+	protected string $startTimestamp;
+
 	function __construct() {
 		parent::__construct( 'SearchDigest', 'searchdigest-reader' );
 		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 	}
 
 	function execute( $par ) {
-		global $wgSearchDigestCreateRedirect;
+		global $wgSearchDigestCreateRedirect, $wgSearchDigestDateThreshold;
 
 		// If a character prefix was provided, we will only return results that start with that character.
 		$this->prefix = Title::makeTitleSafe( NS_MAIN, $this->getRequest()->getRawVal( 'prefix' ) ) ?? '';
@@ -26,6 +28,16 @@ class SpecialSearchDigest extends QueryPage {
 
 		// Add intro text before we execute parent function so that it renders before.
 		$out = $this->getOutput();
+
+		// Set the threshold, and allow overriding with a query parameter
+		$currentTs = wfTimestamp();
+		$fromTs = $this->getRequest()->getInt( 'from' );
+		if ( $fromTs > $currentTs ) {
+			$out->showErrorPage( 'error', 'searchdigest-error-fromtoohigh' );
+			return;
+		}
+		$this->startTimestamp = ( $fromTs > 0 ) ? wfTimestamp( TS_UNIX, $fromTs ) : ( $currentTs - $wgSearchDigestDateThreshold );
+
 		$out->addModuleStyles( [ 'ext.searchdigest.styles' ] );
 		$this->displayViewForm();
 
@@ -71,8 +83,9 @@ class SpecialSearchDigest extends QueryPage {
 			->setTitle( $this->getPageTitle() ) // Remove subpage
 			->setSubmitCallback( [ $this, 'onSubmit' ] )
 			->setWrapperLegendMsg( 'searchdigest' )
-			->addHeaderHtml( $this->msg( 'searchdigest-help' )->parseAsBlock() )
+			->addHeaderHtml( $this->msg( 'searchdigest-help', date( 'Y-m-d', $this->startTimestamp ) )->parseAsBlock() )
 			->setSubmitTextMsg( 'searchdigest-form-submit' )
+			->addHiddenField( 'from', $this->startTimestamp )
 			->prepareForm();
 		$form->displayForm( false );
 	}
@@ -118,14 +131,11 @@ class SpecialSearchDigest extends QueryPage {
 	}
 
 	public function getQueryInfo() {
-		global $wgSearchDigestMinimumMisses, $wgSearchDigestDateThreshold;
+		global $wgSearchDigestMinimumMisses;
 		$db = $this->getRecacheDB();
 
-		// Get the threshold
-		$dateLimit = date( 'Y-m-d', ( wfTimestamp( TS_UNIX ) - $wgSearchDigestDateThreshold ) );
-
 		$conds = [
-			'sd_touched > ' . $db->addQuotes( $dateLimit ),
+			'sd_touched > ' . $db->addQuotes( date( 'Y-m-d', $this->startTimestamp ) ),
 			'sd_misses >= ' . $wgSearchDigestMinimumMisses
 		];
 
@@ -173,6 +183,9 @@ class SpecialSearchDigest extends QueryPage {
 		}
 		if ( $this->sortAlpha ) {
 			$params['sortalpha'] = $this->sortAlpha;
+		}
+		if ( $this->startTimestamp ) {
+			$params['from'] = $this->startTimestamp;
 		}
 
 		return $params;
