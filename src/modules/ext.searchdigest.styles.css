@@ -8,6 +8,7 @@
 	height: 100%;
 	text-align: left;
 	border: 1px solid #bfbfbf;
+	table-layout: auto;
 }
 
 .searchdigest-stats-table tr {
@@ -29,13 +30,17 @@
 	background: #e8e8e8;
 }
 
-.searchdigest-stats-table thead th:last-child,
+.searchdigest-stats-table thead th,
 .searchdigest-stats-table tr td:last-child {
-	padding-left: .5em;
+	padding: 0 .5em;
+}
+
+.searchdigest-stats-table tr td:not(:last-child) {
+	width:100%;
 }
 
 .searchdigest-stats-table tr td:last-child {
-	width: 100px;
+	white-space: nowrap;
 }
 
 .searchdigest-stats-progress-bar {

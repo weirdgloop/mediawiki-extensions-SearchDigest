@@ -177,6 +177,9 @@ class SpecialSearchDigest extends QueryPage {
 			}
 
 			$total = $page_exists + $page_missing;
+			$page_exists_text = $this->getLanguage()->formatNum( $page_exists );
+			$total_text = $this->getLanguage()->formatNum( $total );
+
 			if ( $total === 0 ) {
 				$perc_exists = number_format( 0, 2 );
 			} else {
@@ -196,7 +199,7 @@ class SpecialSearchDigest extends QueryPage {
 	<td class="searchdigest-stats-progress-bar">
 		<div class="searchdigest-stats-progress-done" style="width: $perc_exists%" />
 	</td>
-	<td>$perc_exists%</td>
+	<td>$page_exists_text / $total_text</td>
 </tr>
 EOD;
 		}
