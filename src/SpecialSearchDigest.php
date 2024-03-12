@@ -450,8 +450,10 @@ EOD
 				[ 'query' => $blocksRecord->getQuery() ]
 			);
 
+			$added = $this->getLanguage()->userTimeAndDate( $blocksRecord->getAdded(), $this->getUser() );
+
 			return $blocksRecord->getQuery() . ' (' .
-				$this->msg( 'searchdigest-block-actor', $userLink, $blocksRecord->getAdded() )->plain() . ') (' . $unblockText . ')';
+				$this->msg( 'searchdigest-block-actor', $userLink, $added )->plain() . ') (' . $unblockText . ')';
 		} else {
 			$title = Title::newFromText( $result->sd_query );
 

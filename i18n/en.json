@@ -42,7 +42,7 @@
 	"searchdigest-block-form-query": "Query to block (case sensitive)",
 	"searchdigest-block-form-submit": "Block",
 	"searchdigest-block-complete": "The query '''$1''' has been blocked.",
-	"searchdigest-block-actor": "added by $1 on $2",
+	"searchdigest-block-actor": "added by $1 at $2",
 	"searchdigest-block-buttontext": "block",
 	"searchdigest-nav-main": "Searched queries",
 	"searchdigest-nav-stats": "Stats",
