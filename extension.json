@@ -23,15 +23,11 @@
 		"MediaWiki\\Extension\\SearchDigest\\": "src/"
 	},
 	"SpecialPages": {
-		"SearchDigest": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigest",
-		"SearchDigestStats": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigestStats"
+		"SearchDigest": "MediaWiki\\Extension\\SearchDigest\\SpecialSearchDigest"
 	},
 	"ResourceModules": {
 		"ext.searchdigest.styles": {
 			"styles": "ext.searchdigest.styles.css"
-		},
-		"ext.searchdigest.stats.styles": {
-			"styles": "ext.searchdigest.stats.styles.css"
 		},
 		"ext.searchdigest.redirect": {
 			"packageFiles": [

@@ -23,6 +23,7 @@ class SearchDigestHooks implements SpecialSearchNogomatchHook {
 		$updater->addExtensionIndex( 'searchdigest', 'sd_misses_touched',
 			dirname( __DIR__ ) . '/sql/patch_searchdigest_sd_misses_touched.sql'
 		);
+		$updater->addExtensionTable( 'searchdigest_blocks', dirname( __DIR__ ) . '/sql/searchdigest_blocks.sql' );
 	}
 
 	/**

@@ -42,7 +42,7 @@ class PopulateDummySearches extends Maintenance {
 
 		for ($x = 0; $x < $numEntries; $x++) {
 			$rows[] = [
-				'sd_query' => $this->generateRandomString(),
+				'sd_query' => Title::makeTitleSafe( NS_MAIN, $this->generateRandomString() )->getFullText(),
 				'sd_misses' => rand(1, 2000),
 				'sd_touched' => date("Y-m-d H:i:s")
 			];
