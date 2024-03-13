@@ -8,6 +8,8 @@
 	"searchdigest": "SearchDigest",
 	"searchdigeststats": "SearchDigest stats",
 	"searchdigest-stats-intro": "This page displays the percentage of failed searches that have had a page created since being searched, by initial. Queries searched since '''$1''' are counted in these stats.",
+	"searchdigest-stats-header-initial": "Initial",
+	"searchdigest-stats-header-percent": "Percentage created",
 	"searchdigest-error-fromtoohigh": "The passed 'from' timestamp cannot be in the future.",
 	"searchdigest-desc": "Used for tracking and displaying missed search queries",
 	"searchdigest-help": "This page displays the most common failed searches on this wiki since '''$1'''. The value displayed in brackets next to the search is the all-time number of missed searches.",

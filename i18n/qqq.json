@@ -8,6 +8,8 @@
 	"searchdigest": "The name used on the Special:SpecialPages for the SearchDigest page",
 	"searchdigeststats": "The name used on the Special:SpecialPages for the SearchDigestStats page",
 	"searchdigest-stats-intro": "Text displayed at the top of the Special:SearchDigestStats page",
+	"searchdigest-stats-header-initial": "Text for the first column of SearchDigest stats table",
+	"searchdigest-stats-header-percent": "Text for the second column of SearchDigest stats table",
 	"searchdigest-error-fromtoohigh": "Error text displayed when the 'from' timestamp parameter given by a user is after the current date",
 	"searchdigest-desc": "The description used for the SearchDigest extension",
 	"searchdigest-help": "Text displayed at the top of the Special:SearchDigest page",

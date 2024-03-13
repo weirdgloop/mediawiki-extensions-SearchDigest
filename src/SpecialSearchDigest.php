@@ -211,11 +211,14 @@ EOD;
 		}
 		$rowsAsString = implode( "\n", $rows );
 
+		$colInitial = $this->msg( 'searchdigest-stats-header-initial' );
+		$colPercent = $this->msg( 'searchdigest-stats-header-percent' );
+
 		$out->addHTML(<<<EOD
 <table class="searchdigest-stats-table">
 	<thead>
-		<th style="width: 50px; text-align: center;">Initial</th>
-		<th colspan="2">Percentage created</th>
+		<th style="width: 50px; text-align: center;">$colInitial</th>
+		<th colspan="2">$colPercent</th>
 	</thead>
 	<tbody>
 		$rowsAsString
