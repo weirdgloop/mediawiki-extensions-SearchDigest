@@ -13,6 +13,7 @@
 	"searchdigest-help": "This page displays the most common failed searches on this wiki since '''$1'''. The value displayed in brackets next to the search is the all-time number of missed searches.",
 	"searchdigest-error-invalid-misses": "Invalid value for misses: $1 ($2)",
 	"searchdigest-error-invalid-query": "Invalid value for query: $1 ($2)",
+	"searchdigest-entry": "$1 ($2) ($3)",
 	"searchdigest-redirect-buttontext": "redirect",
 	"searchdigest-redirect-successtext": "Successfully created redirect for $1",
 	"searchdigest-redirect-problem": "There was a problem. The page may have already been created.",
