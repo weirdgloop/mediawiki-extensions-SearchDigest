@@ -53,7 +53,7 @@
 	"searchdigest-unblock": "解除搜尋詞的封鎖",
 	"searchdigest-unblock-help": "解除搜尋詞的封鎖會使其在$1上重新出現。",
 	"searchdigest-unblock-form-submit": "解除封鎖",
-	"searchdigest-unblock-complete": "已從封鎖列表中移除搜尋詞'''$1'''。",
+	"searchdigest-unblock-complete": "已從封鎖清單中移除搜尋詞'''$1'''。",
 	"searchdigest-error-notblocked": "此搜尋詞未被封鎖。",
 	"searchdigest-error-blockalreadyblocked": "此搜尋詞已被封鎖。",
 	"searchdigest-error-blockinvalidquery": "未提供要封鎖的搜尋詞"
