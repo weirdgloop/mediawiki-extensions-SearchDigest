@@ -6,7 +6,7 @@
 	},
 	"searchdigest": "SearchDigest",
 	"searchdigeststats": "SearchDigest統計",
-	"searchdigest-stats-intro": "此頁面以首字母分組，列出了搜尋後對應頁面在失敗搜尋中的佔比。自'''$1'''起搜尋的搜尋詞會被計入在此統計中。",
+	"searchdigest-stats-intro": "此頁面以首字母分組，列出了搜尋後建立的對應頁面在失敗搜尋中的佔比。自'''$1'''起搜尋的搜尋詞會被計入在此統計中。",
 	"searchdigest-stats-header-initial": "首字母",
 	"searchdigest-stats-header-percent": "已建立頁面佔比",
 	"searchdigest-error-fromtoohigh": "「from」參數傳遞的時間戳記不能是未來的時間。",
