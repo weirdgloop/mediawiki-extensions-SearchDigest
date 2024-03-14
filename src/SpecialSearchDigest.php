@@ -195,7 +195,7 @@ class SpecialSearchDigest extends QueryPage {
 			$link = $this->linkRenderer->makePreloadedLink(
 				Title::newFromText(
 					'SearchDigest', NS_SPECIAL
-				), $letter, '', [], [ 'prefix' => $letter, 'from' => $this->startTimestamp ]
+				), $letter, '', [], [ 'prefix' => $letter, 'from' => $this->startTimestamp, 'sortalpha' => true ]
 			);
 			$rows[] = <<<EOD
 <tr>
