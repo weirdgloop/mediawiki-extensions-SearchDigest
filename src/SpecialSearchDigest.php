@@ -464,7 +464,7 @@ EOD
 
 			$added = $this->getLanguage()->userTimeAndDate( $blocksRecord->getAdded(), $this->getUser() );
 
-			return $this->msg( 'searchdigest-entry', $blocksRecord->getQuery(), $this->msg( 'searchdigest-block-actor', $userLink, $added )->plain(), $unblockText );
+			return $this->msg( 'searchdigest-entry', $blocksRecord->getQuery(), $this->msg( 'searchdigest-block-actor', $userLink, $added )->plain(), $unblockText )->plain();
 		} else {
 			$title = Title::newFromText( $result->sd_query );
 
