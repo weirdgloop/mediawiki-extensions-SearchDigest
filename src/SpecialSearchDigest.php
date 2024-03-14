@@ -492,7 +492,7 @@ EOD
 
 			return $this->msg( 'searchdigest-entry', $link, $result->sd_misses, '<a role="button" class="sd-cr-btn" data-page="' .
 				htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '">'
-				. $this->msg( 'searchdigest-redirect-buttontext' )->escaped() . '</a>' . $blockText );
+				. $this->msg( 'searchdigest-redirect-buttontext' )->escaped() . '</a>' . $blockText )->plain();
 		}
 	}
 
