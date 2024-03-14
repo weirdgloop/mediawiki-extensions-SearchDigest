@@ -173,7 +173,7 @@ class SpecialSearchDigest extends QueryPage {
 
 		// Generate the percentages for A-Z
 		$rows = [];
-		foreach ( range( 'A', 'Z' ) as $letter ) {
+		foreach ( SearchDigestUtils::getCharactersForStatsLookup( $this->getContentLanguage()->getCode() ) as $letter ) {
 			$page_exists = 0;
 			$page_missing = 0;
 
@@ -195,7 +195,7 @@ class SpecialSearchDigest extends QueryPage {
 			$link = $this->linkRenderer->makePreloadedLink(
 				Title::newFromText(
 					'SearchDigest', NS_SPECIAL
-				), $letter, '', [], [ 'prefix' => $letter, 'from' => $this->startTimestamp ]
+				), $letter, '', [], [ 'prefix' => $letter, 'from' => $this->startTimestamp, 'sortalpha' => true ]
 			);
 			$rows[] = <<<EOD
 <tr>
@@ -211,11 +211,14 @@ EOD;
 		}
 		$rowsAsString = implode( "\n", $rows );
 
+		$colInitial = $this->msg( 'searchdigest-stats-header-initial' );
+		$colPercent = $this->msg( 'searchdigest-stats-header-percent' );
+
 		$out->addHTML(<<<EOD
 <table class="searchdigest-stats-table">
 	<thead>
-		<th style="width: 50px; text-align: center;">Initial</th>
-		<th colspan="2">Percentage created</th>
+		<th style="width: 50px; text-align: center;">$colInitial</th>
+		<th colspan="2">$colPercent</th>
 	</thead>
 	<tbody>
 		$rowsAsString
@@ -461,8 +464,7 @@ EOD
 
 			$added = $this->getLanguage()->userTimeAndDate( $blocksRecord->getAdded(), $this->getUser() );
 
-			return $blocksRecord->getQuery() . ' (' .
-				$this->msg( 'searchdigest-block-actor', $userLink, $added )->plain() . ') (' . $unblockText . ')';
+			return $this->msg( 'searchdigest-entry', $blocksRecord->getQuery(), $this->msg( 'searchdigest-block-actor', $userLink, $added )->plain(), $unblockText );
 		} else {
 			$title = Title::newFromText( $result->sd_query );
 
@@ -488,9 +490,9 @@ EOD
 					);
 			}
 
-			return $link . ' (' . $result->sd_misses . ') (<a role="button" class="sd-cr-btn" data-page="' .
+			return $this->msg( 'searchdigest-entry', $link, $result->sd_misses, '<a role="button" class="sd-cr-btn" data-page="' .
 				htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '">'
-				. $this->msg( 'searchdigest-redirect-buttontext' )->escaped() . '</a>' . $blockText . ')';
+				. $this->msg( 'searchdigest-redirect-buttontext' )->escaped() . '</a>' . $blockText );
 		}
 	}
 
