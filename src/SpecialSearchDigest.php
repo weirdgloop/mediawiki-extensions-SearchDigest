@@ -173,7 +173,7 @@ class SpecialSearchDigest extends QueryPage {
 
 		// Generate the percentages for A-Z
 		$rows = [];
-		foreach ( range( 'A', 'Z' ) as $letter ) {
+		foreach ( SearchDigestUtils::getCharactersForStatsLookup( $this->getContentLanguage()->getCode() ) as $letter ) {
 			$page_exists = 0;
 			$page_missing = 0;
 
