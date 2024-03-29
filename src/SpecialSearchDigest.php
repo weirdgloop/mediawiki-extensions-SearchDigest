@@ -35,15 +35,20 @@ class SpecialSearchDigest extends QueryPage {
 	}
 
 	protected function addSubtitle() {
-		$main = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ), $this->msg( 'searchdigest-nav-main' )->text() );
-		$stats = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/stats', NS_SPECIAL ), $this->msg( 'searchdigest-nav-stats' )->text() );
+		$links = [ $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ), $this->msg( 'searchdigest-nav-main' )->text() ) ];
 
-		$links = [ $main, $stats ];
+		$lang = $this->getContentLanguage()->getCode();
+		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-reader-stats' ) && ! ( $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) ) {
+			$links[] = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/stats', NS_SPECIAL ), $this->msg( 'searchdigest-nav-stats' )->text() );
+		}
+
 		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-block' ) ) {
 			$links[] = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/block', NS_SPECIAL ), $this->msg( 'searchdigest-nav-block' )->text() );
 		}
 
-		$this->getOutput()->addSubtitle( implode( ' | ', $links ) );
+		if ( count( $links ) > 1 ) {
+			$this->getOutput()->addSubtitle( implode( $this->msg( 'pipe-separator' )->text(), $links ) );
+		}
 	}
 
 	function execute( $par ) {
@@ -58,10 +63,12 @@ class SpecialSearchDigest extends QueryPage {
 
 		$this->query = $this->getRequest()->getText('query');
 
+		$lang = $this->getContentLanguage()->getCode();
+
 		if ( $this->par === 'block' ) {
 			$this->checkUserCanBlock();
 			$this->displayBlockForm();
-		} else if ( $this->par === 'stats' ) {
+		} else if ( ! ( $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) && ( $this->par === 'stats' ) ) {
 			$this->executeStats();
 
 			// Return early so that we don't do any of the standard QueryPage stuff
@@ -171,7 +178,7 @@ class SpecialSearchDigest extends QueryPage {
 		// Make a database call to get the statistics for all letters
 		$res = $this->getStatsFromDatabase();
 
-		// Generate the percentages for A-Z
+		// Generate the percentages for returned charset
 		$rows = [];
 		foreach ( SearchDigestUtils::getCharactersForStatsLookup( $this->getContentLanguage()->getCode() ) as $letter ) {
 			$page_exists = 0;
