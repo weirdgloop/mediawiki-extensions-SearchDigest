@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
-use IDatabase;
+use Wikimedia\Rdbms\IDatabase;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\ActorNormalization;
 use MediaWiki\User\ActorStore;
