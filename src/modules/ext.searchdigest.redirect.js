@@ -115,7 +115,7 @@ SDRedirectDialog.prototype.getActionProcess = function ( action ) {
         ) {
           // Given value is a URL where the hostname is the same as the current hostname, so presumably they're
           // trying to use an external link to a wiki page on the current wiki. Parse it accordingly.
-          const parsedArticle = (possiblyAURL.pathname + possiblyAURL.search).match(new RegExp(articlePath + '(.*)'));
+          const parsedArticle = (possiblyAURL.pathname + possiblyAURL.search + possiblyAURL.hash).match(new RegExp(articlePath + '(.*)'));
           if (parsedArticle.length) {
             value = parsedArticle[1];
           }
