@@ -5,7 +5,7 @@
 		"..."
 	],
 	"url": "https://github.com/weirdgloop/mediawiki-extensions-SearchDigest",
-	"version": "1.5",
+	"version": "1.5.1",
 	"descriptionmsg": "searchdigest-desc",
 	"license-name": "GPL-3.0+",
 	"manifest_version": 1,
@@ -41,6 +41,7 @@
 			"messages": [
 						"searchdigest-redirect-buttontext",
 						"searchdigest-redirect-successtext",
+						"searchdigest-redirect-missing-target",
 						"searchdigest-redirect-problem",
 						"searchdigest-redirect-inputplaceholder",
 						"searchdigest-redirect-helptext",
@@ -51,7 +52,8 @@
 			"dependencies": [
 						"oojs-ui-core",
 						"oojs-ui-windows",
-						"mediawiki.api"
+						"mediawiki.api",
+						"mediawiki.jqueryMsg"
 			]
 		}
 	},
