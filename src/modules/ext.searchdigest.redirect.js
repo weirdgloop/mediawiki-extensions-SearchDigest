@@ -94,7 +94,11 @@ SDRedirectDialog.prototype.getSetupProcess = function ( data ) {
   data = data || {};
   return SDRedirectDialog.super.prototype.getSetupProcess.call( this, data )
       .next( function () {
-        this.pageToCreate = data.page;
+        // In many places, MediaWiki enforces uppercase alphas following the first colon;
+        // using a lowercase in page creation via the API can result in a hard-to-reach page.
+        // Since the former would resolve correctly even if the latter is searched,
+        // it is better to ensure that any character following a colon that can be UC'd, is.
+        this.pageToCreate = data.page.replace( /:./, x => x.toLocaleUpperCase( mw.config.get( "wgContentLanguage" ) ) );
         this.$content.find('#sd-ptc').text(data.page);
         this.actions.setAbilities( {
           redirect: false
