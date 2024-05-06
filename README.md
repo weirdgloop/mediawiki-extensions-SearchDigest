@@ -33,7 +33,7 @@ By default, this extension adds two rights:
 * `searchdigest-admin` provides maintenance tools on the Special:SearchDigest tools that are intended to be used by system administrators, including the ability to clear the database.
 
 ## Translation
-This extension can be translated through the messages in the `ì18n` folder if you're a developer. As a wiki administrator, you may find it a better option to edit the messages on-site in the MediaWiki namespace.
+This extension can be translated through the messages in the `i18n` folder if you're a developer. As a wiki administrator, you may find it a better option to edit the messages on-site in the MediaWiki namespace.
 
 ## License
 This extension is licensed under GNU GPLv3, [see here](LICENSE) for more information.
