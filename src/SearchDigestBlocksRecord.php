@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
-use IDatabase;
+use Wikimedia\Rdbms\IDatabase;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\ActorNormalization;
 use MediaWiki\User\ActorStore;
@@ -158,14 +158,5 @@ class SearchDigestBlocksRecord {
 		$r->setAdded( $row->sd_blocks_added );
 		$r->setActor( $row->sd_blocks_actor );
 		return $r;
-	}
-
-	public static function checkQueries ( $queries ) {
-		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
-		return $dbr->newSelectQueryBuilder()
-			->table( self::TABLE_NAME )
-			->select( 'sd_blocks_query' )
-			->where( 'sd_blocks_query IN (' . $dbr->makeList( $queries ) . ')' )
-			->fetchFieldValues();
 	}
 }

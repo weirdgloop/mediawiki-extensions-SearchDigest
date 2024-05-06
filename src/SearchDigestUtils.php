@@ -8,7 +8,7 @@ class SearchDigestUtils {
 	 * @param string $lang - should be provided by MediaWikiServices::getInstance()->getContentLanguage()->getCode()
 	 */
 	public static function getCharactersForStatsLookup( string $lang ): array {
-		$chars = array_merge( range( '0', '9' ), range( 'A', 'Z' ) );
+		$chars = range( 'A', 'Z' );
 
 		switch ( $lang ) {
 			case 'ru':
