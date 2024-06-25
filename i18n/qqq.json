@@ -18,6 +18,7 @@
 	"searchdigest-entry": "Format of listed entries, used in the regular list and block list, $1 for page link, $2 for text put in the first parentheses, $3 for the second one",
 	"searchdigest-redirect-buttontext": "Text used for the create redirect button on Special:SearchDigest",
 	"searchdigest-redirect-successtext": "Text used when a redirect has been successfully created on Special:SearchDigest",
+	"searchdigest-redirect-missing-target": "Text used when the target page doesn't exist when creating a redirect on Special:SearchDigest.",
 	"searchdigest-redirect-problem": "Text used when we failed to create a page using the create redirect button on Special:SearchDigest",
 	"searchdigest-redirect-editsummary": "Text used in the edit summary when creating pages via the create redirect button on Special:SearchDigest",
 	"searchdigest-redirect-inputplaceholder": "Placeholder text used for the input field of the create redirect modal on Special:SearchDigest",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lakejason0"
+			"Lakejason0",
+			"Bilin Tsui"
 		]
 	},
 	"searchdigest": "SearchDigest",
@@ -18,6 +19,7 @@
 	"searchdigest-redirect-buttontext": "重新導向",
 	"searchdigest-redirect-successtext": "成功為$1建立了重新導向",
 	"searchdigest-redirect-problem": "出現了錯誤。頁面可能已被建立。",
+	"searchdigest-redirect-missing-target": "您重新導向到的頁面看似不存在或無效。",
 	"searchdigest-redirect-editsummary": "透過[[Special:SearchDigest]]重新導向到[[$1]]",
 	"searchdigest-redirect-inputplaceholder": "輸入重新導向目標",
 	"searchdigest-redirect-helptext": "請輸入您想將<span id='sd-ptc'></span>重新導向到的頁面：",

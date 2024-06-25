@@ -35,15 +35,20 @@ class SpecialSearchDigest extends QueryPage {
 	}
 
 	protected function addSubtitle() {
-		$main = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ), $this->msg( 'searchdigest-nav-main' )->text() );
-		$stats = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/stats', NS_SPECIAL ), $this->msg( 'searchdigest-nav-stats' )->text() );
+		$links = [ $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ), $this->msg( 'searchdigest-nav-main' )->text() ) ];
 
-		$links = [ $main, $stats ];
+		$lang = $this->getContentLanguage()->getCode();
+		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-reader-stats' ) && ! ( $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) ) {
+			$links[] = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/stats', NS_SPECIAL ), $this->msg( 'searchdigest-nav-stats' )->text() );
+		}
+
 		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-block' ) ) {
 			$links[] = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/block', NS_SPECIAL ), $this->msg( 'searchdigest-nav-block' )->text() );
 		}
 
-		$this->getOutput()->addSubtitle( implode( ' | ', $links ) );
+		if ( count( $links ) > 1 ) {
+			$this->getOutput()->addSubtitle( implode( $this->msg( 'pipe-separator' )->text(), $links ) );
+		}
 	}
 
 	function execute( $par ) {
@@ -58,10 +63,12 @@ class SpecialSearchDigest extends QueryPage {
 
 		$this->query = $this->getRequest()->getText('query');
 
+		$lang = $this->getContentLanguage()->getCode();
+
 		if ( $this->par === 'block' ) {
 			$this->checkUserCanBlock();
 			$this->displayBlockForm();
-		} else if ( $this->par === 'stats' ) {
+		} else if ( ! ( $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) && ( $this->par === 'stats' ) ) {
 			$this->executeStats();
 
 			// Return early so that we don't do any of the standard QueryPage stuff
@@ -171,7 +178,7 @@ class SpecialSearchDigest extends QueryPage {
 		// Make a database call to get the statistics for all letters
 		$res = $this->getStatsFromDatabase();
 
-		// Generate the percentages for A-Z
+		// Generate the percentages for returned charset
 		$rows = [];
 		foreach ( SearchDigestUtils::getCharactersForStatsLookup( $this->getContentLanguage()->getCode() ) as $letter ) {
 			$page_exists = 0;
@@ -412,12 +419,13 @@ EOD
 		$db = $this->getRecacheDB();
 
 		$conds = [];
+		$joinConds = [];
 
 		if ( $this->par === 'block' ) {
 			$tables = [ 'searchdigest_blocks' ];
 			$fields = [ 'sd_blocks_query', 'sd_blocks_added', 'sd_blocks_actor' ];
 		} else {
-			$tables = [ 'searchdigest' ];
+			$tables = [ 'searchdigest', 'searchdigest_blocks', 'page' ];
 			$fields = [ 'sd_query', 'sd_misses', 'sd_touched' ];
 			$conds = [
 				'sd_touched > ' . $db->addQuotes( date( 'Y-m-d', $this->startTimestamp ) ),
@@ -427,12 +435,36 @@ EOD
 			if ( $this->prefix != '' ) {
 				$conds[] = 'sd_query ' . $db->buildLike( $this->prefix, $db->anyString() );
 			}
+
+			/**
+			 * We're going to do a LEFT JOIN here to check whether articles exist. We could lookup whether each Title
+			 * exists later in a LinkBatch, but that wouldn't let us easily remove results from the result wrapper.
+			 * It is important to note that this does not include any namespace except the main namespace.
+			 */
+			$joinConds['page'] = [
+				'LEFT JOIN', [
+					'page_namespace = 0',
+					'page_title = ' . $db->strreplace( 'sd_query', '" "', '"_"' )
+				]
+			];
+			$conds[] = 'page_title IS NULL';
+
+			/**
+			 * And finally, make sure this query hasn't been blocked by an admin.
+			 */
+			$joinConds['searchdigest_blocks'] = [
+				'LEFT JOIN', [
+					'sd_blocks_query = sd_query'
+				]
+			];
+			$conds[] = 'sd_blocks_query IS NULL';
 		}
 
 		return [
 			'tables' => $tables,
 			'fields' => $fields,
 			'conds' => $conds,
+			'join_conds' => $joinConds
 		];
 	}
 
@@ -524,37 +556,5 @@ EOD
 		}
 
 		return true;
-	}
-
-	protected function preprocessResults( $db, $res ) {
-		if ( !$this->par ) {
-			$queries = [];
-
-			/**
-			 * This pre-processing is similar to QueryPage::executeLBFromResultWrapper(), but slightly different as the
-			 * row is called "sd_query" instead of "title". We're also assuming that the namespace is going to be NS_MAIN,
-			 * but this may not always be true.
-			 */
-			if ( !$res->numRows() ) {
-				return;
-			}
-
-			$batch = $this->getLinkBatchFactory()->newLinkBatch();
-
-			foreach ( $res as $row ) {
-				$batch->add( NS_MAIN, $row->sd_query );
-				$queries[] = $row->sd_query;
-			}
-			$batch->execute();
-
-			$res->seek( 0 );
-
-			/**
-			 * Our list of queries should now be checked to see if any of them are blocked by a user with the
-			 * searchdigest-block right. We're pre-processing this as a batch here, rather than individually,
-			 * for speed and performance (to avoid 500 database calls for each 500 result page).
-			 */
-			$this->blockedQueries = SearchDigestBlocksRecord::checkQueries( $queries );
-		}
 	}
 }

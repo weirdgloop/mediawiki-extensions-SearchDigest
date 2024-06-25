@@ -14,16 +14,16 @@ function SDRedirectDialog( config ) {
 OO.inheritClass( SDRedirectDialog, OO.ui.ProcessDialog );
 
 SDRedirectDialog.static.name = 'sdredir';
-SDRedirectDialog.static.title = mw.message('searchdigest-redirect-title').escaped();
+SDRedirectDialog.static.title = mw.message('searchdigest-redirect-title').text();
 SDRedirectDialog.static.actions = [
   {
     flags: 'primary',
-    label: mw.message('searchdigest-redirect-redirectbutton').escaped(),
+    label: mw.message('searchdigest-redirect-redirectbutton').text(),
     action: 'redirect'
   },
   {
     flags: 'safe',
-    label: mw.message('cancel').escaped()
+    label: mw.message('cancel').text()
   }
 ];
 
@@ -38,8 +38,9 @@ SDRedirectDialog.prototype.initialize = function () {
     value: '',
     options: [],
     $overlay: this.$overlay,
-    placeholder: mw.message('searchdigest-redirect-inputplaceholder').escaped()
+    placeholder: mw.message('searchdigest-redirect-inputplaceholder').text()
   } );
+  this.comboBox.setValidation( 'non-empty' );
   this.content.$element.append( '<p>' + mw.message('searchdigest-redirect-helptext').text() + '</p>' );
   this.content.$element.append( this.comboBox.$element );
 
@@ -50,10 +51,13 @@ SDRedirectDialog.prototype.initialize = function () {
 };
 
 SDRedirectDialog.prototype.onComboboxInputChange = function ( value ) {
-  this.actions.setAbilities( {
-    redirect: !!value.length
-  } );
   var self = this;
+
+  self.comboBox.getValidity().then(() => {
+      this.actions.setAbilities({ redirect: true });
+  }).catch(() => {
+      this.actions.setAbilities({ redirect: false });
+  })
   if (value.length) {
     // Input not empty, let's try search suggesting using the opensearch API
     api = new mw.Api();
@@ -74,11 +78,16 @@ SDRedirectDialog.prototype.onComboboxInputChange = function ( value ) {
         self.comboBox.setOptions(opts);
       }
     });
-  };
+  } else {
+      self.comboBox.setOptions([]);
+  }
 };
 
 SDRedirectDialog.prototype.onComboboxInputEnter = function () {
-  this.executeAction('redirect');
+    var self = this;
+    self.comboBox.getValidity().then(() => {
+        this.executeAction('redirect');
+    })
 };
 
 SDRedirectDialog.prototype.getSetupProcess = function ( data ) {
@@ -115,24 +124,41 @@ SDRedirectDialog.prototype.getActionProcess = function ( action ) {
         ) {
           // Given value is a URL where the hostname is the same as the current hostname, so presumably they're
           // trying to use an external link to a wiki page on the current wiki. Parse it accordingly.
-          const parsedArticle = (possiblyAURL.pathname + possiblyAURL.search).match(new RegExp(articlePath + '(.*)'));
+          const parsedArticle = (possiblyAURL.pathname + possiblyAURL.search + possiblyAURL.hash).match(new RegExp(articlePath + '(.*)'));
           if (parsedArticle.length) {
             value = parsedArticle[1];
           }
         }
       } catch (e) {}
 
-
       api = new mw.Api();
-      api.create( this.pageToCreate, {
-        summary: mw.format(SDdata.editsummary, value)
-      }, SDdata.redirect + " [[" + value + "]]").done( function(data) {
-        mw.notify( mw.message('searchdigest-redirect-successtext', self.pageToCreate).escaped(), { tag: 'sd-created' } );
-        self.close( { page: self.pageToCreate } );
-      }).fail( function(data) {
-        OO.ui.alert( mw.message('searchdigest-redirect-problem').escaped() );
-        self.close( { page: self.pageToCreate } );
-      });
+
+      // Check that the page we're redirecting to actually exists, as a final sanity check
+      api.get({
+          action: 'query',
+          prop: 'info',
+          titles: value,
+          formatversion: 2
+      }).done(function (data) {
+          if (!data || !Object.values(data.query.pages).length) {
+              return OO.ui.alert(mw.message('searchdigest-redirect-missing-target', self.pageToCreate).text());
+          } else {
+              let pageRes = Object.values(data.query.pages)[0];
+              if (pageRes.missing || pageRes.invalid) {
+                  return OO.ui.alert(mw.message('searchdigest-redirect-missing-target', self.pageToCreate).text());
+              }
+
+              // Create the page that we're redirecting
+              return api.create(self.pageToCreate, {
+                  summary: mw.format(SDdata.editsummary, value)
+              }, SDdata.redirect + " [[" + value + "]]").done( function(data) {
+                  mw.notify( mw.message('searchdigest-redirect-successtext', self.pageToCreate).text(), { tag: 'sd-created' } );
+                  self.close( { page: self.pageToCreate } );
+              }).fail( function() {
+                  OO.ui.alert( mw.message('searchdigest-redirect-problem').text() );
+              });
+          }
+      })
     }, this );
   }
   // Fallback to parent handler
