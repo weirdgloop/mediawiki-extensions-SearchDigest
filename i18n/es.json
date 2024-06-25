@@ -9,7 +9,7 @@
         "searchdigest-stats-intro": "Esta página muestra el porcentaje de búsquedas fallidas que han tenido una página creada desde que fueron buscadas, por inicial. Las consultas buscadas desde '''$1''' se cuentan en estas estadísticas.",
         "searchdigest-stats-header-initial": "Inicial",
         "searchdigest-stats-header-percent": "Porcentaje creado",
-        "searchdigest-error-fromtoohigh": "El 'desde' pase de tiempo no puede estar en el futuro.",
+        "searchdigest-error-fromtoohigh": "La fecha colocada en 'desde' no puede estar en el futuro.",
         "searchdigest-desc": "Se utiliza para rastrear y mostrar consultas de búsqueda fallidas",
         "searchdigest-help": "Esta página muestra las búsquedas fallidas más comunes en esta wiki desde '''$1'''. El valor mostrado entre paréntesis junto a la búsqueda es el número total de búsquedas fallidas.",
         "searchdigest-error-invalid-misses": "Valor no válido para 'fallas': $1 ($2)",
