@@ -32,7 +32,7 @@ class SearchDigestHooks implements SpecialSearchNogomatchHook {
 	 */
 	public function onSpecialSearchNogomatch ( &$title ) {
 		// Schedule a job to update the count for this page, keeping search requests idempotent.
-		MediaWikiServices::getInstance()->getJobQueueGroup()->push(
+		MediaWikiServices::getInstance()->getJobQueueGroup()->lazyPush(
 			new SearchDigestJob( [
 				'query' => $title->getFullText()
 			] )
