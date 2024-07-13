@@ -9,3 +9,7 @@ $specialPageAliases['en'] = [
 $specialPageAliases['de'] = [
 	'SearchDigest' => [ 'Suchübersicht' ]
 ];
+
+$specialPageAliases['ru'] = [
+	'SearchDigest' => [ 'Поисковый обзор' ],
+];
