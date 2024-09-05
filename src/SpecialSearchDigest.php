@@ -82,7 +82,7 @@ class SpecialSearchDigest extends QueryPage {
 			$this->setStartTimestamp();
 
 			// If a character prefix was provided, we will only return results that start with that character.
-			$this->prefix = Title::makeTitleSafe( NS_MAIN, $this->getRequest()->getRawVal( 'prefix' ) ) ?? '';
+			$this->prefix = Title::makeTitleSafe( NS_MAIN, $this->getRequest()->getRawVal( 'prefix' ) ?? '' ) ?? '';
 			$this->sortAlpha = $this->getRequest()->getBool( 'sortalpha' );
 
 			$this->displayViewForm();
