@@ -13,3 +13,7 @@ $specialPageAliases['de'] = [
 $specialPageAliases['ru'] = [
 	'SearchDigest' => [ 'Поисковый обзор' ],
 ];
+
+$specialPageAliases['fi'] = [
+	'SearchDigest' => [ 'Haun yleiskatsaus' ]
+];
