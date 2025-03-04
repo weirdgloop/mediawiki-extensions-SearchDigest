@@ -38,7 +38,7 @@ class SpecialSearchDigest extends QueryPage {
 		$links = [ $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ), $this->msg( 'searchdigest-nav-main' )->text() ) ];
 
 		$lang = $this->getContentLanguage()->getCode();
-		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-reader-stats' ) && ! ( $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) ) {
+		if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-reader-stats' ) && ! ( $lang == 'ja' || $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) ) {
 			$links[] = $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest/stats', NS_SPECIAL ), $this->msg( 'searchdigest-nav-stats' )->text() );
 		}
 
@@ -68,7 +68,7 @@ class SpecialSearchDigest extends QueryPage {
 		if ( $this->par === 'block' ) {
 			$this->checkUserCanBlock();
 			$this->displayBlockForm();
-		} else if ( ! ( $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) && ( $this->par === 'stats' ) ) {
+		} else if ( ! ( $lang == 'ja' || $lang == 'lzh' || preg_match( '/^zh/', $lang ) ) && ( $this->par === 'stats' ) ) {
 			$this->executeStats();
 
 			// Return early so that we don't do any of the standard QueryPage stuff
