@@ -92,7 +92,7 @@ class SpecialSearchDigest extends QueryPage {
 		$this->setLinkBatchFactory( MediaWikiServices::getInstance()->getLinkBatchFactory() );
 
 		if ( $this->par === 'block' ) {
-			$out->setPageTitle( $this->msg( 'searchdigest-block' ) );
+			$out->setPageTitleMsg( $this->msg( 'searchdigest-block' ) );
 		} else {
 			// If the user has the searchdigest-admin permission, add admin tools to page
 			if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-admin' ) ) {
@@ -146,7 +146,7 @@ class SpecialSearchDigest extends QueryPage {
 		$this->checkUserCanBlock();
 
 		$out = $this->getOutput();
-		$out->setPageTitle($this->msg('searchdigest-unblock'));
+		$out->setPageTitleMsg( $this->msg('searchdigest-unblock') );
 
 		$fields = [
 			'query' => [
@@ -168,7 +168,7 @@ class SpecialSearchDigest extends QueryPage {
 
 	protected function executeStats() {
 		$out = $this->getOutput();
-		$out->setPageTitle($this->msg('searchdigeststats'));
+		$out->setPageTitleMsg( $this->msg('searchdigeststats') );
 
 		$this->checkUserCanViewStats();
 		$this->setStartTimestamp();
