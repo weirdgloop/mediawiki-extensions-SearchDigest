@@ -14,7 +14,7 @@
 	"searchdigest-redirect-problem": "Ein Fehler ist aufgetreten. Die Seite wurde eventuell bereits erstellt.",
 	"searchdigest-redirect-editsummary": "Weiterleitung nach [[$1]] mit [[Spezial:Suchübersicht]] erstellt",
 	"searchdigest-redirect-inputplaceholder": "Name der Zielseite...",
-	"searchdigest-redirect-helptext": "Bitte gebe die Seite ein, zu welcher <span id='sd-ptc'></span> weiterleiten soll:",
+	"searchdigest-redirect-helptext": "Bitte gebe die Seite ein, zu welcher $1 weiterleiten soll:",
 	"searchdigest-redirect-redirectbutton": "Erstellen",
 	"searchdigest-redirect-title": "Weiterleitung erstellen",
 	"searchdigest-admintools-noperms": "Du hast nicht die benötigten Berechtigungen für diese Aktion.",

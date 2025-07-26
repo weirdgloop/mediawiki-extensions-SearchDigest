@@ -21,7 +21,7 @@
 	"searchdigest-redirect-missing-target": "您重定向到的页面看似不存在或无效。",
 	"searchdigest-redirect-editsummary": "通过[[Special:SearchDigest]]重定向到[[$1]]",
 	"searchdigest-redirect-inputplaceholder": "输入重定向目标",
-	"searchdigest-redirect-helptext": "请输入您想将<span id='sd-ptc'></span>重定向到的页面：",
+	"searchdigest-redirect-helptext": "请输入您想将$1重定向到的页面：",
 	"searchdigest-redirect-redirectbutton": "创建",
 	"searchdigest-redirect-title": "创建重定向",
 	"searchdigest-admintools-noperms": "您无权执行此操作。",

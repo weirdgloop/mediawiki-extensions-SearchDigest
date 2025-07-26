@@ -21,7 +21,7 @@
 	"searchdigest-redirect-missing-target": "Страница, на которую делается перенаправление, не существует или недействитела.",
 	"searchdigest-redirect-editsummary": "Перенаправление на [[$1]] с помощью [[Служебная:SearchDigest|Служебная:Поисковый обзор]]",
 	"searchdigest-redirect-inputplaceholder": "Введите целевой запрос сюда…",
-	"searchdigest-redirect-helptext": "Пожалуйста, введите название страницы, на которую будет перенаправлять запрос «<span id='sd-ptc'></span>»:",
+	"searchdigest-redirect-helptext": "Пожалуйста, введите название страницы, на которую будет перенаправлять запрос «$1»:",
 	"searchdigest-redirect-redirectbutton": "Создать",
 	"searchdigest-redirect-title": "Создать перенаправление",
 	"searchdigest-admintools-noperms": "У вас недостаточно прав для этого действия.",

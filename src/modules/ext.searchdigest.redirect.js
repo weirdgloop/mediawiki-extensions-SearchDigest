@@ -41,7 +41,10 @@ SDRedirectDialog.prototype.initialize = function () {
     placeholder: mw.message('searchdigest-redirect-inputplaceholder').text()
   } );
   this.comboBox.setValidation( 'non-empty' );
-  this.content.$element.append( '<p>' + mw.message('searchdigest-redirect-helptext').text() + '</p>' );
+  this.content.$element.append( $( '<p>' ).html(
+	  mw.message( 'searchdigest-redirect-helptext' ).escaped()
+		  .replace( '$1', '<span id=\'sd-ptc\'></span>' )
+  ) )
   this.content.$element.append( this.comboBox.$element );
 
   this.comboBox.connect( this, { 'change': 'onComboboxInputChange' } );

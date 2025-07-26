@@ -22,7 +22,7 @@
 	"searchdigest-redirect-missing-target": "您重新導向到的頁面看似不存在或無效。",
 	"searchdigest-redirect-editsummary": "透過[[Special:SearchDigest]]重新導向到[[$1]]",
 	"searchdigest-redirect-inputplaceholder": "輸入重新導向目標",
-	"searchdigest-redirect-helptext": "請輸入您想將<span id='sd-ptc'></span>重新導向到的頁面：",
+	"searchdigest-redirect-helptext": "請輸入您想將$1重新導向到的頁面：",
 	"searchdigest-redirect-redirectbutton": "建立",
 	"searchdigest-redirect-title": "建立重新導向",
 	"searchdigest-admintools-noperms": "您無權執行此操作。",

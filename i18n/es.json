@@ -20,7 +20,7 @@
         "searchdigest-redirect-problem": "Hubo un problema. Es posible que la página ya haya sido creada.",
         "searchdigest-redirect-editsummary": "Redirigido a [[$1]] a través de [[Especial:SearchDigest]]",
         "searchdigest-redirect-inputplaceholder": "Escribe aquí el destino de la redirección...",
-        "searchdigest-redirect-helptext": "Por favor, ingresa la página a la que deseas redirigir <span id='sd-ptc'></span>:",
+        "searchdigest-redirect-helptext": "Por favor, ingresa la página a la que deseas redirigir $1:",
         "searchdigest-redirect-redirectbutton": "Crear",
         "searchdigest-redirect-title": "Crear redirección",
         "searchdigest-admintools-noperms": "No tienes permiso para hacer esto.",
@@ -56,5 +56,5 @@
         "searchdigest-unblock-complete": "La consulta '''$1''' ha sido eliminada de la lista de bloqueo.",
         "searchdigest-error-notblocked": "Esta consulta no está bloqueada.",
         "searchdigest-error-blockalreadyblocked": "Esta consulta ya está bloqueada.",
-        "searchdigest-error-blockinvalidquery": "No se proporcionó ninguna consulta de búsqueda para bloquear"    
+        "searchdigest-error-blockinvalidquery": "No se proporcionó ninguna consulta de búsqueda para bloquear"
 }

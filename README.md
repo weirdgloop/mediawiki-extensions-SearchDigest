@@ -1,6 +1,8 @@
 # SearchDigest
 MediaWiki extension which tracks failed searches on your wiki and displays them on a dedicated special page, `Special:SearchDigest`. This was originally a feature on Wikia wikis.
 
+When a failed search is made, a job is added to the job queue ([why?](https://www.mediawiki.org/wiki/Manual:Job_queue/For_developers#Use_jobs_if_you_need_to_save_data_in_the_context_of_a_GET_request)) to update the count in the database. You will need to periodically run the `runJobs.php` maintenance script or set a value for [`$wgJobRunRate`](https://www.mediawiki.org/wiki/Manual:$wgJobRunRate) to process them.
+
 **Live demo**: https://runescape.wiki
 
 ## Requirements

@@ -22,7 +22,7 @@
 	"searchdigest-redirect-missing-target": "The page you are redirecting to doesn't appear to exist, or is invalid.",
 	"searchdigest-redirect-editsummary": "Redirected to [[$1]] via [[Special:SearchDigest]]",
 	"searchdigest-redirect-inputplaceholder": "Typing redirect target here...",
-	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect <span id='sd-ptc'></span> to:",
+	"searchdigest-redirect-helptext": "Please enter the page you wish to redirect $1 to:",
 	"searchdigest-redirect-redirectbutton": "Create",
 	"searchdigest-redirect-title": "Create redirect",
 	"searchdigest-admintools-noperms": "You do not have permission to do this.",

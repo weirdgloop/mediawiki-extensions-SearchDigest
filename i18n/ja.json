@@ -21,7 +21,7 @@
 	"searchdigest-redirect-missing-target": "指定の転送先が存在しないか無効です",
 	"searchdigest-redirect-editsummary": "[[特別:検索要録]]を介して[[$1]]への転送ページ化",
 	"searchdigest-redirect-inputplaceholder": "ここに転送先を入力...",
-	"searchdigest-redirect-helptext": "<span id='sd-ptc'></span>の転送先にしたいページを入力してください：",
+	"searchdigest-redirect-helptext": "$1の転送先にしたいページを入力してください：",
 	"searchdigest-redirect-redirectbutton": "作成",
 	"searchdigest-redirect-title": "転送ページを作成",
 	"searchdigest-admintools-noperms": "この操作をする権限がありません。",

@@ -47,7 +47,7 @@ class SpecialSearchDigest extends QueryPage {
 		}
 
 		if ( count( $links ) > 1 ) {
-			$this->getOutput()->addSubtitle( implode( $this->msg( 'pipe-separator' )->text(), $links ) );
+			$this->getOutput()->addSubtitle( implode( $this->msg( 'pipe-separator' )->escaped(), $links ) );
 		}
 	}
 
@@ -98,7 +98,7 @@ class SpecialSearchDigest extends QueryPage {
 			if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-admin' ) ) {
 				$out->addModuleStyles( [ 'oojs-ui.styles.icons-moderation' ] );
 
-				$out->addHtml('<div class="searchdigest-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->plain() . '</p>');
+				$out->addHtml('<div class="searchdigest-admin-tools"><p>' . wfMessage( 'searchdigest-admintools-help' )->parse() . '</p>');
 				$this->displayAdminForm();
 				$out->addHtml('</div>');
 			}
@@ -159,7 +159,8 @@ class SpecialSearchDigest extends QueryPage {
 
 		$form = HTMLForm::factory( 'ooui', $fields, $this->getContext() )
 			->setWrapperLegendMsg( 'searchdigest-unblock' )
-			->addHeaderHtml( $this->msg( 'searchdigest-unblock-help', $this->linkRenderer->makePreloadedLink( Title::newFromText( 'SearchDigest', NS_SPECIAL ) ) )->plain() )
+			->addHeaderHtml( $this->msg( 'searchdigest-unblock-help' )->rawParams( $this->linkRenderer->makePreloadedLink(
+				Title::newFromText( 'SearchDigest', NS_SPECIAL ) ) )->parse() )
 			->setFormIdentifier( 'searchdigest-unblock' )
 			->setSubmitTextMsg( 'searchdigest-unblock-form-submit' )
 			->setSubmitCallback( [ $this, 'onUnblockSubmit' ] )
@@ -488,7 +489,7 @@ EOD
 
 			$unblockText = $this->linkRenderer->makePreloadedLink(
 				Title::newFromText( 'SearchDigest/unblock', NS_SPECIAL ),
-				$this->msg( 'searchdigest-unblock-buttontext' )->escaped(),
+				$this->msg( 'searchdigest-unblock-buttontext' )->parse(),
 				'',
 				[],
 				[ 'query' => $blocksRecord->getQuery() ]
@@ -496,7 +497,11 @@ EOD
 
 			$added = $this->getLanguage()->userTimeAndDate( $blocksRecord->getAdded(), $this->getUser() );
 
-			return $this->msg( 'searchdigest-entry', $blocksRecord->getQuery(), $this->msg( 'searchdigest-block-actor', $userLink, $added )->plain(), $unblockText )->plain();
+			return $this->msg( 'searchdigest-entry' )->rawParams(
+				$blocksRecord->getQuery(),
+				$this->msg( 'searchdigest-block-actor' )->rawParams( $userLink, $added )->parse(),
+				$unblockText
+			)->parse();
 		} else {
 			$title = Title::newFromText( $result->sd_query );
 
@@ -515,16 +520,22 @@ EOD
 			if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-block' ) ) {
 				$blockText = ' &#183; ' . $this->linkRenderer->makePreloadedLink(
 						Title::newFromText( 'SearchDigest/block', NS_SPECIAL ),
-						$this->msg( 'searchdigest-block-buttontext' )->escaped(),
+						$this->msg( 'searchdigest-block-buttontext' )->parse(),
 						'',
 						[],
 						[ 'query' => $result->sd_query ]
 					);
 			}
 
-			return $this->msg( 'searchdigest-entry', $link, $result->sd_misses, '<a role="button" class="sd-cr-btn" data-page="' .
-				htmlspecialchars( $result->sd_query, ENT_QUOTES ) . '">'
-				. $this->msg( 'searchdigest-redirect-buttontext' )->escaped() . '</a>' . $blockText )->plain();
+			$button = Html::rawElement( 'a', [
+				'role' => 'button',
+				'class' => 'sd-cr-btn',
+				'data-page' => htmlspecialchars( $result->sd_query, ENT_QUOTES )
+			], $this->msg( 'searchdigest-redirect-buttontext' )->parse() );
+
+			return $this->msg( 'searchdigest-entry' )->rawParams(
+				$link, $result->sd_misses, $button . $blockText
+			)->parse();
 		}
 	}
 
