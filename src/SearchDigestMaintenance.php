@@ -20,12 +20,12 @@ class SearchDigestMaintenance {
 	private string $table;
 
 	public function __construct() {
-    $this->dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB()->getConnection( DB_PRIMARY );
+    $this->dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB()->getMaintenanceConnectionRef( DB_PRIMARY );
     $this->table = 'searchdigest';
   }
 
   public function doTableWipe () {
-    $res = $this->dbw->delete($this->table, "*");
+	$res = $this->dbw->truncateTable( $this->table );
     return $res;
   }
 

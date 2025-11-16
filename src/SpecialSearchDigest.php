@@ -568,4 +568,8 @@ EOD
 
 		return true;
 	}
+
+	public function doesWrites() {
+		return true;
+	}
 }
