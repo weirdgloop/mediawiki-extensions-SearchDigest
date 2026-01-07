@@ -17,7 +17,7 @@
 	},
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.38.0"
+		"MediaWiki": ">= 1.45.0"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\SearchDigest\\": "src/"
