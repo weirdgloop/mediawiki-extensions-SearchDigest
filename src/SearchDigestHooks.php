@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
-use DatabaseUpdater;
+use MediaWiki\Installer\DatabaseUpdater;
 use MediaWiki\Hook\SpecialSearchNogomatchHook;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;

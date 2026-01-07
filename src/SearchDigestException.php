@@ -3,7 +3,7 @@
 namespace MediaWiki\Extension\SearchDigest;
 
 use Exception;
-use Message;
+use MediaWiki\Message\Message;
 
 class SearchDigestException extends Exception {
   public function __construct( Message $message, $code = 0, $previous = null ) {

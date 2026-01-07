@@ -2,12 +2,12 @@
 
 namespace MediaWiki\Extension\SearchDigest;
 
-use HTMLForm;
+use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Html\Html;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
-use QueryPage;
+use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Title\Title;
 
 class SpecialSearchDigest extends QueryPage {
