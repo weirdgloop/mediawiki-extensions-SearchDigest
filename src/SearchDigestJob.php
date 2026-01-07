@@ -3,8 +3,8 @@
 namespace MediaWiki\Extension\SearchDigest;
 
 use Exception;
-use Job;
-use GenericParameterJob;
+use MediaWiki\JobQueue\Job;
+use MediaWiki\JobQueue\GenericParameterJob;
 
 class SearchDigestJob extends Job implements GenericParameterJob {
 	/** @var string */
