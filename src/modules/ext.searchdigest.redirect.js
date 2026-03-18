@@ -143,6 +143,7 @@ SDRedirectDialog.prototype.getActionProcess = function ( action ) {
           titles: value,
           formatversion: 2
       }).done(function (data) {
+          self.close();
           if (!data || !Object.values(data.query.pages).length) {
               return OO.ui.alert(mw.message('searchdigest-redirect-missing-target', self.pageToCreate).text());
           } else {
