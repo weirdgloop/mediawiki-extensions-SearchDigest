@@ -7,6 +7,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use \MediaWiki\Title\Title;
+use \Wikimedia\Rdbms\IDatabase;
 
 class PopulateDummySearches extends Maintenance {
 	public function __construct() {
