@@ -104,7 +104,7 @@ class SpecialSearchDigest extends QueryPage {
 			}
 
 			// Additional client JS for redirect button
-			if ( $wgSearchDigestCreateRedirect === true ) {
+			if ( $wgSearchDigestCreateRedirect === true && $this->permManager->userHasRight( $this->getUser(), 'createpage' ) ) {
 				$out->addModules( 'ext.searchdigest.redirect' );
 			}
 
@@ -514,11 +514,21 @@ EOD
 				return false;
 			}
 
-			$link = $this->linkRenderer->makeLink( $title );
-			$blockText = '';
+			$out = $this->linkRenderer->makeLink( $title );
+			$out .= $this->msg( 'word-separator' )->escaped();
+			$out .= $this->msg( 'parentheses' )->rawParams( $result->sd_misses )->escaped();
+			$links = [];
+
+			if ( $this->permManager->userHasRight( $this->getUser(), 'createpage' ) ) {
+				$links[] = Html::rawElement( 'a', [
+					'role' => 'button',
+					'class' => 'sd-cr-btn',
+					'data-page' => htmlspecialchars( $result->sd_query, ENT_QUOTES )
+				], $this->msg( 'searchdigest-redirect-buttontext' )->parse() );
+			}
 
 			if ( $this->permManager->userHasRight( $this->getUser(), 'searchdigest-block' ) ) {
-				$blockText = ' &#183; ' . $this->linkRenderer->makePreloadedLink(
+				$links[] = $this->linkRenderer->makePreloadedLink(
 						Title::newFromText( 'SearchDigest/block', NS_SPECIAL ),
 						$this->msg( 'searchdigest-block-buttontext' )->parse(),
 						'',
@@ -527,15 +537,12 @@ EOD
 					);
 			}
 
-			$button = Html::rawElement( 'a', [
-				'role' => 'button',
-				'class' => 'sd-cr-btn',
-				'data-page' => htmlspecialchars( $result->sd_query, ENT_QUOTES )
-			], $this->msg( 'searchdigest-redirect-buttontext' )->parse() );
+			if ( $links ) {
+				$out .= $this->msg( 'word-separator' )->escaped();
+				$out .= $this->msg( 'parentheses' )->rawParams( $this->getLanguage()->pipeList( $links ) )->escaped();
+			}
 
-			return $this->msg( 'searchdigest-entry' )->rawParams(
-				$link, $result->sd_misses, $button . $blockText
-			)->parse();
+			return $out;
 		}
 	}
 
