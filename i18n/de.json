@@ -12,7 +12,7 @@
 	"searchdigest-redirect-buttontext": "Weiterleitung erstellen",
 	"searchdigest-redirect-successtext": "Weiterleitung für „$1“ erfolgreich erstellt",
 	"searchdigest-redirect-problem": "Ein Fehler ist aufgetreten. Die Seite wurde eventuell bereits erstellt.",
-	"searchdigest-redirect-editsummary": "Weiterleitung nach [[$1]] mit [[Spezial:Suchübersicht]] erstellt",
+	"searchdigest-redirect-editsummary": "Weiterleitung nach [[$1]] mit [[Spezial:Suchübersicht]] erstellt nach $2 verfehlten Suchen",
 	"searchdigest-redirect-inputplaceholder": "Name der Zielseite...",
 	"searchdigest-redirect-helptext": "Bitte gebe die Seite ein, zu welcher $1 weiterleiten soll:",
 	"searchdigest-redirect-redirectbutton": "Erstellen",
