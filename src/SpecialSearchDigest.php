@@ -523,7 +523,7 @@ EOD
 				$links[] = Html::rawElement( 'a', [
 					'role' => 'button',
 					'class' => 'sd-cr-btn',
-					'data-page' => htmlspecialchars( $result->sd_query, ENT_QUOTES )
+					'data-page' => htmlspecialchars( $result->sd_query, ENT_QUOTES ),
 					'data-misses' => htmlspecialchars( $result->sd_misses, ENT_QUOTES )
 				], $this->msg( 'searchdigest-redirect-buttontext' )->parse() );
 			}
