@@ -34,6 +34,7 @@ SDRedirectDialog.prototype.initialize = function () {
     expanded: false
   } );
   this.pageToCreate = ''
+  this.missedSearchesCount = '0'
   this.comboBox = new OO.ui.ComboBoxInputWidget( {
     value: '',
     options: [],
@@ -98,6 +99,7 @@ SDRedirectDialog.prototype.getSetupProcess = function ( data ) {
   return SDRedirectDialog.super.prototype.getSetupProcess.call( this, data )
       .next( function () {
         this.pageToCreate = data.page;
+        this.missedSearchesCount = data.misses;
         this.$content.find('#sd-ptc').text(data.page);
         this.actions.setAbilities( {
           redirect: false
@@ -154,7 +156,7 @@ SDRedirectDialog.prototype.getActionProcess = function ( action ) {
 
               // Create the page that we're redirecting
               return api.create(self.pageToCreate, {
-                  summary: mw.format(SDdata.editsummary, value)
+                  summary: mw.format(SDdata.editsummary, value, self.missedSearchesCount)
               }, SDdata.redirect + " [[" + value + "]]").done( function(data) {
                   mw.notify( mw.message('searchdigest-redirect-successtext', self.pageToCreate).text(), { tag: 'sd-created' } );
                   self.close( { page: self.pageToCreate } );
@@ -208,6 +210,6 @@ var $redirBtns = $('a.sd-cr-btn');
 
 $redirBtns.each(function (i) {
   $(this).on('click', function () {
-    windowManager.openWindow( redirDialog, { page: $(this).attr('data-page') } )
+    windowManager.openWindow( redirDialog, { page: $(this).attr('data-page'), misses: $(this).attr('data-misses') } )
   })
 });
