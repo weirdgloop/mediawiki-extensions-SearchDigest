@@ -29,7 +29,11 @@ class SpecialSearchDigest extends QueryPage {
 	protected $blockedQueries = [];
 
 	function __construct() {
-		parent::__construct( 'SearchDigest', 'searchdigest-reader' );
+		if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+			parent::__construct( 'SearchDigest' );
+		} else {
+			parent::__construct( 'SearchDigest', 'searchdigest-reader' );
+		}
 		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		$this->permManager = MediaWikiServices::getInstance()->getPermissionManager();
 	}
@@ -579,5 +583,10 @@ EOD
 
 	public function doesWrites() {
 		return true;
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'searchdigest-reader';
 	}
 }
