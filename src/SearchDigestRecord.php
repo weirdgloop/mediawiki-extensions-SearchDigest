@@ -49,7 +49,7 @@ class SearchDigestRecord {
    * @param int $val
    */
   public function setMisses ( $val ) {
-    if ( !is_integer( $val ) ) {
+    if ( !is_int( $val ) ) {
       $msg = wfMessage( 'searchdigest-error-invalid-misses', $val, gettype( $val ) );
       throw new SearchDigestException ( $msg );
     }
